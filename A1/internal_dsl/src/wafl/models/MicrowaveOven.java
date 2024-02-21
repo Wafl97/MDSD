@@ -19,10 +19,9 @@ public class MicrowaveOven implements Model {
     private final StateMachine stateMachine;
 
     public MicrowaveOven() {
-        System.out.println("MICROWAVE OVEN");
         AtomicBoolean doorOpen = new AtomicBoolean(false);
 
-        this.stateMachine = new StateMachine()
+        this.stateMachine = new StateMachine("MICROWAVE OVEN")
 
                 .when(INACTIVE)
                     .on(START)

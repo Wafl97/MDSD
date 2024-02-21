@@ -73,15 +73,37 @@ public class StateNode {
         return Optional.empty();
     }
 
+    public boolean willTerminate(String input) {
+        // Check all conditions are met
+        if (!this.inputs.containsKey(input)) {
+            //System.out.printf("%s not found\n", input);
+            return false;
+        }
+        //System.out.printf("%s found checking conditions ... ", input);
+        for (Outcome outcome : this.inputs.get(input)) {
+            Optional<Condition> condition = outcome.getCondition();
+            if (condition.isEmpty()) {
+                //System.out.print(" success\n");
+                return outcome.terminate();
+            }
+            if (condition.get().check()) {
+                //System.out.print(" success\n");
+                return outcome.terminate();
+            }
+        }
+        //System.out.print(" failure\n");
+        return false;
+    }
+
     @Override
     public String toString() {
         return this.inputs.keySet()
                 .stream()
-                .map(input -> String.format("\t ON = %s {\n%s\t}", input,
+                .map(input -> String.format("\t\t ON = %s [\n%s\t\t]", input,
                     this.inputs.get(input)
                             .stream()
                             .map(Outcome::toString)
-                            .collect(Collectors.joining("\n\t\tOR\n\n"))))
+                            .collect(Collectors.joining("\n\t\t\tOR\n\n"))))
                 .collect(Collectors.joining("\n"));
     }
 

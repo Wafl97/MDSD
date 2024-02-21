@@ -4,10 +4,7 @@ import wafl.models.CdPlayer;
 import wafl.models.CookingHood;
 import wafl.models.MicrowaveOven;
 import wafl.models.Model;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import wafl.v2.StateMachine;
 
 /**
  * @author Marc L. W. Bertelsen
@@ -17,41 +14,50 @@ import java.io.InputStreamReader;
  */
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) {
 
-        System.out.print("""
-                Select machine:
-                1) Microwave Oven
-                2) CD Player
-                3) Cooking Hood
-                Enter:\s""");
-        String option = reader.readLine();
-        Model m;
-        switch (option) {
-            case "1" -> m = new MicrowaveOven();
-            case "2" -> m = new CdPlayer();
-            case "3" -> m = new CookingHood();
-            default -> {
-                System.out.println("Not a valid option");
-                return;
-            }
-        }
+        Model microwaveOven = new MicrowaveOven();
+        Model cdPlayer = new CdPlayer();
+        Model cookingHood = new CookingHood();
 
-        System.out.println("Options: [(1)SHOW, (2)RUN, (3)BOTH]");
-        System.out.print("Enter: ");
-        option = reader.readLine();
-        switch (option) {
-            case "1","SHOW" -> System.out.println(m);
-            case "2","RUN" -> m.run();
-            case "3","BOTH" -> {
-                System.out.println(m);
-                m.run();
-            }
-            default -> {
-                System.out.println("Not a valid option");
-                return;
-            }
-        }
+        // make a statemachine for the statemachines
+        new StateMachine("MAIN")
+                .when("MENU")
+                    .on("MODELS")
+                    .then("SELECT MACHINE")
+                .when("MENU")
+                    .on("DEBUG")
+                    .then("DEBUG MENU")
+                .when("MENU")
+                    .on("EXIT")
+                    .end()
+
+                .when("SELECT MACHINE")
+                    .on("MICROWAVE OVEN")
+                    .then(microwaveOven::run)
+                    .end()
+                .when("SELECT MACHINE")
+                    .on("CD PLAYER")
+                    .then(cdPlayer::run)
+                    .end()
+                .when("SELECT MACHINE")
+                    .on("COOKING HOOD")
+                    .then(cookingHood::run)
+                    .end()
+
+                .when("DEBUG MENU")
+                    .on("BACK")
+                    .then("MENU")
+                .when("DEBUG MENU")
+                    .on("MICROWAVE OVEN")
+                    .then(() -> System.out.println(microwaveOven))
+                .when("DEBUG MENU")
+                    .on("CD PLAYER")
+                    .then(() -> System.out.println(cdPlayer))
+                .when("DEBUG MENU")
+                    .on("COOKING HOOD")
+                    .then(() -> System.out.println(cookingHood))
+
+                .start("MENU");
     }
 }

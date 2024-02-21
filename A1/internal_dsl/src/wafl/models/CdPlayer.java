@@ -20,13 +20,12 @@ public class CdPlayer implements Model {
     private final StateMachine stateMachine;
 
     public CdPlayer() {
-        System.out.println("CD PLAYER");
         List<String> trackQueue = new ArrayList<>(){{
             add("Track_1");add("Track_2");add("Track_3");add("Track_4");add("Track_5");
         }};
         AtomicInteger trackIndex = new AtomicInteger(0);
 
-        this.stateMachine = new StateMachine()
+        this.stateMachine = new StateMachine("CD PLAYER")
 
                 .when(STOPPED)
                     .on(PLAY)

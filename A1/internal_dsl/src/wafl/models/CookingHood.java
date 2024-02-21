@@ -16,10 +16,9 @@ public class CookingHood implements Model {
     private final StateMachine stateMachine;
 
     public CookingHood() {
-        System.out.println("COOKING HOOD");
         AtomicInteger power = new AtomicInteger(0);
 
-        this.stateMachine = new StateMachine()
+        this.stateMachine = new StateMachine("COOKING HOOD")
 
                 .when(OFF)
                     .on(PLUS)

@@ -15,9 +15,11 @@ import java.util.stream.Collectors;
  */
 public class StateMachine {
 
+    private final String name;
     private StateNode currentState;
     private final Map<String,StateNode> stateNodes;
     private final BufferedReader reader;
+    private boolean doRun;
 
 
     // Used for construction
@@ -25,7 +27,9 @@ public class StateMachine {
     private String inputUnderConstruction;
     private Outcome.Builder outcomeBuilder;
 
-    public StateMachine() {
+    public StateMachine(final String name) {
+        this.name = name;
+        this.doRun = true;
         this.stateNodes = new HashMap<>();
         this.reader = new BufferedReader(new InputStreamReader(System.in));
     }
@@ -61,30 +65,44 @@ public class StateMachine {
         return this;
     }
 
+    public StateMachine end() {
+        this.outcomeBuilder.terminate();
+        this.stateNodes.get(this.nodeUnderConstruction)
+                .appendInput(this.inputUnderConstruction, this.outcomeBuilder.build());
+        return this;
+    }
+
     public void start(String initialState) {
 
         this.currentState = this.stateNodes.get(initialState);
-        System.out.printf("Initial state: [%s]\n", initialState);
+        System.out.printf("Starting [%s] Initial state: [%s]\n", this.name, initialState);
 
-        while (true) {
-            try {
-                // check input
-                this.currentState.printAvailableInputs();
+        new Thread(() -> {
+            while (this.doRun) {
+                try {
+                    // check input
+                    this.currentState.printAvailableInputs();
 
-                System.out.printf("[%s] Enter: ", this.currentState.getName());
-                String line = this.reader.readLine();
+                    System.out.printf("[%s] Enter: ", this.currentState.getName());
+                    String line = this.reader.readLine();
 
-                Optional<Callback> callback = this.currentState.getCallback(line);
-                callback.ifPresent(Callback::call);
+                    if (this.currentState.willTerminate(line)) {
+                        this.doRun = false;
+                        System.out.printf("Ending [%s]\n\n", this.name);
+                    }
 
-                Optional<String> nextState = this.currentState.getNextState(line);
-                nextState.ifPresent(this::setState);
+                    Optional<Callback> callback = this.currentState.getCallback(line);
+                    callback.ifPresent(Callback::call);
 
-            } catch (IOException e) {
-                System.out.println("oops ¯\\_(ツ)_/¯");
-                return;
+                    Optional<String> nextState = this.currentState.getNextState(line);
+                    nextState.ifPresent(this::setState);
+
+                } catch (IOException e) {
+                    System.out.println("oops ¯\\_(ツ)_/¯");
+                    return;
+                }
             }
-        }
+        }).start();
     }
 
     private void setState(String newState) {
@@ -94,9 +112,9 @@ public class StateMachine {
 
     @Override
     public String toString() {
-        return this.stateNodes.keySet()
+        return String.format("MODEL = %s {\n%s\n}", this.name, this.stateNodes.keySet()
                 .stream()
-                .map(state -> String.format("WHEN = %s {\n%s\n}", state, this.stateNodes.get(state)))
-                .collect(Collectors.joining("\n"));
+                .map(state -> String.format("\tWHEN = %s [\n%s\n\t]", state, this.stateNodes.get(state)))
+                .collect(Collectors.joining("\n")));
     }
 }

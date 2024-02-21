@@ -10,9 +10,10 @@ public class Outcome {
     private Condition condition;
     private String nextState;
     private Callback callback;
+    private boolean terminate;
 
     private Outcome() {
-
+        this.terminate = false;
     }
 
     public Optional<Condition> getCondition() {
@@ -27,12 +28,19 @@ public class Outcome {
         return Optional.ofNullable(this.callback);
     }
 
+    public boolean terminate() {
+        return this.terminate;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        this.getCondition().ifPresent((c) -> builder.append(String.format("\t\tAND = %s\n", c)));
-        this.getNextState().ifPresent((s) -> builder.append(String.format("\t\tTHEN = %s\n", s)));
-        this.getCallback().ifPresent((c) -> builder.append(String.format("\t\tTHEN = %s\n", c)));
+        this.getCondition().ifPresent((c) -> builder.append(String.format("\t\t\tAND = %s\n", c)));
+        this.getNextState().ifPresent((s) -> builder.append(String.format("\t\t\tTHEN = %s\n", s)));
+        this.getCallback().ifPresent((c) -> builder.append(String.format("\t\t\tTHEN = %s\n", c)));
+        if (this.terminate()) {
+            builder.append("\t\t\tEND\n");
+        }
         return builder.toString();
     }
 
@@ -57,6 +65,11 @@ public class Outcome {
 
         public Builder callback(Callback callback) {
             this.outcome.callback = callback;
+            return this;
+        }
+
+        public Builder terminate() {
+            this.outcome.terminate = true;
             return this;
         }
 
