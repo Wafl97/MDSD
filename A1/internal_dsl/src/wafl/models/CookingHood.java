@@ -29,19 +29,19 @@ public class CookingHood implements Model {
                     .on(MINUS)
                     .and(() -> power.get() == 1)
                     .then(OFF)
-                .when(ON)
+
                     .on(PLUS)
                     .and(() -> power.get() == 6)
                     .then(MAX)
-                .when(ON)
+
                     .on(PLUS)
                     .and(() -> power.get() < 6)
                     .then(power::getAndIncrement)
-                .when(ON)
+
                     .on(MINUS)
                     .and(() -> power.get() == 1)
                     .then(OFF)
-                .when(ON)
+
                     .on(MINUS)
                     .and(() -> power.get() > 0)
                     .then(power::getAndDecrement)

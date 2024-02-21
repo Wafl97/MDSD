@@ -27,7 +27,7 @@ public class MicrowaveOven implements Model {
                     .on(START)
                     .and(() -> !doorOpen.get())
                     .then(COOKING)
-                .when(INACTIVE)
+
                     .on(CLOSE_DOOR)
                     .and(doorOpen::get)
                     .then(() -> doorOpen.set(false))
@@ -35,10 +35,10 @@ public class MicrowaveOven implements Model {
                 .when(COOKING)
                     .on(TIMER)
                     .then(INACTIVE)
-                .when(COOKING)
+
                     .on(STOP)
                     .then(INACTIVE)
-                .when(COOKING)
+
                     .on(OPEN_DOOR)
                     .then(DOOR_OPEN)
                     .then(() -> doorOpen.set(true))
@@ -47,7 +47,7 @@ public class MicrowaveOven implements Model {
                     .on(CLOSE_DOOR)
                     .then(() -> doorOpen.set(true))
                     .then(COOKING)
-                .when(DOOR_OPEN)
+
                     .on(STOP)
                     .then(INACTIVE);
     }

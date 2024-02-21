@@ -53,43 +53,82 @@ public class StateMachine {
         };
     }
 
+    /**
+     * Specify where the model should read from. Default is System.in
+     * @param input where the model will read from
+     * @return itself
+     */
     public StateMachine i(Input input) {
         this.input = input;
         return this;
     }
 
+    /**
+     * Specify where the model should output to. Default is {@code System.out.println}
+     * @param output where the model will output to
+     * @return itself
+     */
     public StateMachine o(Output output) {
         this.output = output;
         return this;
     }
 
+    /**
+     * Primes the model to spawn a thread when starting
+     * @return itself
+     */
     public StateMachine spawnTread() {
         this.doSpawnThread = true;
         return this;
     }
 
+    /**
+     * Specify the amount of info given when running the model
+     * @param printMode default it NORMAL
+     * @return itself
+     */
     public StateMachine printMode(PrintMode printMode) {
         this.printMode = printMode;
         return this;
     }
 
+    /**
+     * When the model is in a given state, this is then followed by "on"
+     * @param state the given state
+     * @return itself
+     */
     public StateMachine when(String state) {
         this.stateNodes.putIfAbsent(state, new StateNode(state));
         this.nodeUnderConstruction = state;
         return this;
     }
 
+    /**
+     * When a given state receives some input, this is then followed by "and", "then"  or "end"
+     * @param input a given input
+     * @return itself
+     */
     public StateMachine on(String input) {
         this.outcomeBuilder = Outcome.newBuilder();
         this.inputUnderConstruction = input;
         return this;
     }
 
+    /**
+     * When a given state receives some input and an additional condition is true, this is then followed by "then"
+     * @param condition an additional condition than must be met
+     * @return itself
+     */
     public StateMachine and(Condition condition) {
         this.outcomeBuilder.condition(condition);
         return this;
     }
 
+    /**
+     * Specify the next state for the model it the conditions, provided before, are met
+     * @param state the next state
+     * @return itself
+     */
     public StateMachine then(String state) {
         this.outcomeBuilder.nextState(state);
         this.stateNodes.get(this.nodeUnderConstruction)
@@ -97,6 +136,11 @@ public class StateMachine {
         return this;
     }
 
+    /**
+     * Run code when some conditions are met
+     * @param callback will be called if the conditions provided are met
+     * @return itself
+     */
     public StateMachine then(Callback callback) {
         this.outcomeBuilder.callback(callback);
         this.stateNodes.get(this.nodeUnderConstruction)
@@ -104,6 +148,10 @@ public class StateMachine {
         return this;
     }
 
+    /**
+     * Marks an end state of the model
+     * @return itself
+     */
     public StateMachine end() {
         this.outcomeBuilder.terminate();
         this.stateNodes.get(this.nodeUnderConstruction)
@@ -111,6 +159,12 @@ public class StateMachine {
         return this;
     }
 
+    /**
+     * Start the model <br/>
+     * Mote: this has to be the last method in the chain, everything after is ignored
+     * @param initialState the initial state of the model
+     * @return itself
+     */
     public StateMachine start(String initialState) {
 
         if (this.printMode.order >= PrintMode.MAXIMAL.order) {

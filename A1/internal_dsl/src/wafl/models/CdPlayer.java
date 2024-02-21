@@ -31,10 +31,10 @@ public class CdPlayer implements Model {
                     .on(PLAY)
                     .and(() -> !trackQueue.isEmpty() && trackIndex.get() < trackQueue.size())
                     .then(PLAYING)
-                .when(STOPPED)
+
                     .on(FORWARD)
                     .then(trackIndex::getAndIncrement)
-                .when(STOPPED)
+
                     .on(BACKWARD)
                     .then(trackIndex::getAndDecrement)
 
@@ -42,21 +42,21 @@ public class CdPlayer implements Model {
                     .on(STOP)
                     .then(STOPPED)
                     .then(() -> trackIndex.set(0))
-                .when(PLAYING)
+
                     .on(PAUSE)
                     .then(PAUSED)
 
                 .when(PAUSED)
                     .on(PLAY)
                     .then(PLAYING)
-                .when(PAUSED)
+
                     .on(STOP)
                     .then(STOPPED)
                     .then(() -> trackIndex.set(0))
-                .when(PAUSED)
+
                     .on(FORWARD)
                     .then(trackIndex::getAndIncrement)
-                .when(PAUSED)
+
                     .on(BACKWARD)
                     .then(trackIndex::getAndDecrement);
     }
