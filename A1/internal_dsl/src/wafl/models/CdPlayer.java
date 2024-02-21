@@ -1,0 +1,76 @@
+package wafl.models;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import wafl.v2.StateMachine;
+
+public class CdPlayer implements Model {
+
+    private static final String STOPPED = "STOPPED";
+    private static final String PLAYING = "PLAYING";
+    private static final String PAUSED = "PAUSED";
+
+    private static final String PLAY = "PLAY";
+    private static final String STOP = "STOP";
+    private static final String PAUSE = "PAUSE";
+    private static final String FORWARD = "FORWARD";
+    private static final String BACKWARD = "BACKWARD";
+
+    private final StateMachine stateMachine;
+
+    public CdPlayer() {
+        System.out.println("CD PLAYER");
+        List<String> trackQueue = new ArrayList<>(){{
+            add("Track_1");add("Track_2");add("Track_3");add("Track_4");add("Track_5");
+        }};
+        AtomicInteger trackIndex = new AtomicInteger(0);
+
+        this.stateMachine = new StateMachine()
+
+                .when(STOPPED)
+                    .on(PLAY)
+                    .and(() -> !trackQueue.isEmpty() && trackIndex.get() < trackQueue.size())
+                    .then(PLAYING)
+                .when(STOPPED)
+                    .on(FORWARD)
+                    .then(trackIndex::getAndIncrement)
+                .when(STOPPED)
+                    .on(BACKWARD)
+                    .then(trackIndex::getAndDecrement)
+
+                .when(PLAYING)
+                    .on(STOP)
+                    .then(STOPPED)
+                    .then(() -> trackIndex.set(0))
+                .when(PLAYING)
+                    .on(PAUSE)
+                    .then(PAUSED)
+
+                .when(PAUSED)
+                    .on(PLAY)
+                    .then(PLAYING)
+                .when(PAUSED)
+                    .on(STOP)
+                    .then(STOPPED)
+                    .then(() -> trackIndex.set(0))
+                .when(PAUSED)
+                    .on(FORWARD)
+                    .then(trackIndex::getAndIncrement)
+                .when(PAUSED)
+                    .on(BACKWARD)
+                    .then(trackIndex::getAndDecrement);
+
+
+    }
+
+    @Override
+    public void run() {
+        this.stateMachine.start(STOPPED);
+    }
+
+    @Override
+    public String toString() {
+        return this.stateMachine.toString();
+    }
+}
