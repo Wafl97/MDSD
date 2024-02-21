@@ -4,6 +4,7 @@ import wafl.models.CdPlayer;
 import wafl.models.CookingHood;
 import wafl.models.MicrowaveOven;
 import wafl.models.Model;
+import wafl.v2.PrintMode;
 import wafl.v2.StateMachine;
 
 /**
@@ -21,7 +22,8 @@ public class Main {
         Model cookingHood = new CookingHood();
 
         // make a statemachine for the statemachines
-        new StateMachine("MAIN")
+        StateMachine mainMenu = new StateMachine("MAIN");
+        mainMenu
                 .when("MENU")
                     .on("MODELS")
                     .then("SELECT MACHINE")
@@ -49,6 +51,9 @@ public class Main {
                     .on("BACK")
                     .then("MENU")
                 .when("DEBUG MENU")
+                    .on("MAIN")
+                    .then(() -> System.out.println(mainMenu))
+                .when("DEBUG MENU")
                     .on("MICROWAVE OVEN")
                     .then(() -> System.out.println(microwaveOven))
                 .when("DEBUG MENU")
@@ -58,6 +63,7 @@ public class Main {
                     .on("COOKING HOOD")
                     .then(() -> System.out.println(cookingHood))
 
+                .spawnTread()
                 .start("MENU");
     }
 }

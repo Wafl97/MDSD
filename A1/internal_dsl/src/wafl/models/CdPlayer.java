@@ -59,8 +59,6 @@ public class CdPlayer implements Model {
                 .when(PAUSED)
                     .on(BACKWARD)
                     .then(trackIndex::getAndDecrement);
-
-
     }
 
     @Override

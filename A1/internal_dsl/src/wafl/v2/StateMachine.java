@@ -18,8 +18,11 @@ public class StateMachine {
     private final String name;
     private StateNode currentState;
     private final Map<String,StateNode> stateNodes;
-    private final BufferedReader reader;
+    private PrintMode printMode;
+    private Input input;
+    private Output output;
     private boolean doRun;
+    private boolean doSpawnThread;
 
 
     // Used for construction
@@ -30,8 +33,44 @@ public class StateMachine {
     public StateMachine(final String name) {
         this.name = name;
         this.doRun = true;
+        this.doSpawnThread = false;
         this.stateNodes = new HashMap<>();
-        this.reader = new BufferedReader(new InputStreamReader(System.in));
+        this.printMode = PrintMode.NORMAL;
+        this.output = System.out::print;
+        this.input = defaultInput();
+    }
+    private Input defaultInput() {
+        return new Input() {
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            @Override
+            public String in() {
+                try {
+                    return reader.readLine();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+    }
+
+    public StateMachine i(Input input) {
+        this.input = input;
+        return this;
+    }
+
+    public StateMachine o(Output output) {
+        this.output = output;
+        return this;
+    }
+
+    public StateMachine spawnTread() {
+        this.doSpawnThread = true;
+        return this;
+    }
+
+    public StateMachine printMode(PrintMode printMode) {
+        this.printMode = printMode;
+        return this;
     }
 
     public StateMachine when(String state) {
@@ -72,41 +111,63 @@ public class StateMachine {
         return this;
     }
 
-    public void start(String initialState) {
+    public StateMachine start(String initialState) {
 
-        this.currentState = this.stateNodes.get(initialState);
-        System.out.printf("Starting [%s] Initial state: [%s]\n", this.name, initialState);
+        if (this.printMode.order >= PrintMode.MAXIMAL.order) {
+            System.out.println(this);
+        }
 
-        new Thread(() -> {
-            while (this.doRun) {
-                try {
-                    // check input
-                    this.currentState.printAvailableInputs();
+        if (this.printMode.order >= PrintMode.NORMAL.order) {
+            this.output.out(String.format("Starting [%s] ", this.name));
+        }
+        this.setState(initialState);
 
-                    System.out.printf("[%s] Enter: ", this.currentState.getName());
-                    String line = this.reader.readLine();
+        if (this.doSpawnThread) {
+            new Thread(this::runLoop).start();
+        } else {
+            runLoop();
+        }
 
-                    if (this.currentState.willTerminate(line)) {
-                        this.doRun = false;
-                        System.out.printf("Ending [%s]\n\n", this.name);
-                    }
+        return this;
+    }
 
-                    Optional<Callback> callback = this.currentState.getCallback(line);
-                    callback.ifPresent(Callback::call);
+    private void runLoop() {
+        while (this.doRun) {
+            // check input
 
-                    Optional<String> nextState = this.currentState.getNextState(line);
-                    nextState.ifPresent(this::setState);
+            if (this.printMode.order >= PrintMode.MINIMAL.order) {
+                this.currentState.printAvailableInputs();
+                this.output.out(String.format("[%s] Enter: ", this.currentState.getName()));
+            }
+            String line = this.input.in();
 
-                } catch (IOException e) {
-                    System.out.println("oops ¯\\_(ツ)_/¯");
-                    return;
+            if (this.currentState.willTerminate(line)) {
+                this.doRun = false;
+                if (this.printMode.order >= PrintMode.NORMAL.order) {
+                    this.output.out(String.format("Ending [%s]\n\n", this.name));
                 }
             }
-        }).start();
+
+            Optional<Callback> callback = this.currentState.getCallback(line);
+            callback.ifPresent(Callback::call);
+
+            Optional<String> nextState = this.currentState.getNextState(line);
+            nextState.ifPresent(this::setState);
+
+        }
     }
 
     private void setState(String newState) {
-        System.out.printf("Changing state [%s] -> [%s]\n", this.currentState.getName(), newState);
+        if (this.printMode.order >= PrintMode.NORMAL.order) {
+            if (this.currentState == null) {
+                this.output.out(String.format("Initial state: [%s]\n", newState));
+            } else {
+                this.output.out(String.format("Changing state [%s] -> [%s]\n", this.currentState.getName(), newState));
+            }
+        }
+        else if (this.printMode.order == PrintMode.TESTING.order) {
+            this.output.out(newState);
+        }
         this.currentState = this.stateNodes.get(newState);
     }
 
