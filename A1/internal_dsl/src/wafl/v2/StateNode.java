@@ -99,7 +99,7 @@ public class StateNode {
     public String toString() {
         return this.inputs.keySet()
                 .stream()
-                .map(input -> String.format("\t\t ON = %s [\n%s\t\t]", input,
+                .map(input -> String.format("\t\tON = %s [\n%s\t\t]", input,
                     this.inputs.get(input)
                             .stream()
                             .map(Outcome::toString)

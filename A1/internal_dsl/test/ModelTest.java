@@ -1,5 +1,7 @@
 import org.junit.Assert;
 import org.junit.Test;
+import wafl.v2.Callback;
+import wafl.v2.Condition;
 import wafl.v2.PrintMode;
 import wafl.v2.StateMachine;
 
@@ -181,5 +183,59 @@ public class ModelTest {
 
         // Check the order is the same
         assertArrayEquals(expectedOutputs.toArray(), simulatedOutputs.toArray());
+    }
+
+    @Test
+    public void abstractSyntaxTest() {
+
+        Condition con = () -> {
+            return true;
+        };
+
+        Callback call = () -> {};
+
+        // Test that it is consistent
+        for (int i = 0; i < 10; i++) {
+            StateMachine stateMachine = new StateMachine("TEST")
+                    .when("S_A")
+                        .on("B")
+                        .then("S_B")
+
+                        .on("X")
+                        .and(con)
+                        .end()
+
+                    .when("S_B")
+                        .on("A")
+                        .then("S_A")
+                        .then(call)
+
+                        .on("Y")
+                        .then(call);
+
+            String expected = String.format("""
+                MODEL = TEST {
+                \tWHEN = S_A [
+                \t\tON = B [
+                \t\t\tTHEN = S_B
+                \t\t]
+                \t\tON = X [
+                \t\t\tAND = %s
+                \t\t\tEND
+                \t\t]
+                \t]
+                \tWHEN = S_B [
+                \t\tON = A [
+                \t\t\tTHEN = S_A
+                \t\t\tTHEN = %s
+                \t\t]
+                \t\tON = Y [
+                \t\t\tTHEN = %s
+                \t\t]
+                \t]
+                }""", con, call, call);
+
+            assertEquals(expected, stateMachine.toString());
+        }
     }
 }
