@@ -1,4 +1,4 @@
-package wafl.v2;
+package wafl.dsl;
 
 /**
  * @author Marc L. W. Bertelsen

@@ -1,5 +1,8 @@
-package wafl.v2;
+package wafl.dsl;
 
+/**
+ * @author Marc L. W. Bertelsen
+ */
 public enum PrintMode {
     TESTING(-1),
     MINIMAL(0),

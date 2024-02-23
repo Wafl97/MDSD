@@ -3,8 +3,11 @@ package wafl.models;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import wafl.v2.StateMachine;
+import wafl.dsl.StateMachine;
 
+/**
+ * @author Marc L. W. Bertelsen
+ */
 public class CdPlayer implements Model {
 
     private static final String STOPPED = "STOPPED";
@@ -19,46 +22,49 @@ public class CdPlayer implements Model {
 
     private final StateMachine stateMachine;
 
+    private int trackIndex;
+    private final List<String> trackQueue;
+
     public CdPlayer() {
-        List<String> trackQueue = new ArrayList<>(){{
+        this.trackQueue = new ArrayList<>(){{
             add("Track_1");add("Track_2");add("Track_3");add("Track_4");add("Track_5");
         }};
-        AtomicInteger trackIndex = new AtomicInteger(0);
+        this.trackIndex = 0;
 
         this.stateMachine = new StateMachine("CD PLAYER")
 
-                .when(STOPPED)
-                    .on(PLAY)
-                    .and(() -> !trackQueue.isEmpty() && trackIndex.get() < trackQueue.size())
+                .given(STOPPED)
+                    .when(PLAY)
+                    .and(() -> !trackQueue.isEmpty() && trackIndex < trackQueue.size())
                     .then(PLAYING)
 
-                    .on(FORWARD)
-                    .then(trackIndex::getAndIncrement)
+                    .when(FORWARD)
+                    .then(() -> trackIndex++)
 
-                    .on(BACKWARD)
-                    .then(trackIndex::getAndDecrement)
+                    .when(BACKWARD)
+                    .then(() -> trackIndex--)
 
-                .when(PLAYING)
-                    .on(STOP)
+                .given(PLAYING)
+                    .when(STOP)
                     .then(STOPPED)
-                    .then(() -> trackIndex.set(0))
+                    .then(() -> trackIndex = 0)
 
-                    .on(PAUSE)
+                    .when(PAUSE)
                     .then(PAUSED)
 
-                .when(PAUSED)
-                    .on(PLAY)
+                .given(PAUSED)
+                    .when(PLAY)
                     .then(PLAYING)
 
-                    .on(STOP)
+                    .when(STOP)
                     .then(STOPPED)
-                    .then(() -> trackIndex.set(0))
+                    .then(() -> trackIndex = 0)
 
-                    .on(FORWARD)
-                    .then(trackIndex::getAndIncrement)
+                    .when(FORWARD)
+                    .then(() -> trackIndex++)
 
-                    .on(BACKWARD)
-                    .then(trackIndex::getAndDecrement);
+                    .when(BACKWARD)
+                    .then(() -> trackIndex--);
     }
 
     @Override

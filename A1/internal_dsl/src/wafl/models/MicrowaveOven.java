@@ -1,9 +1,12 @@
 package wafl.models;
 
-import wafl.v2.StateMachine;
+import wafl.dsl.StateMachine;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * @author Marc L. W. Bertelsen
+ */
 public class MicrowaveOven implements Model {
 
     private static final String INACTIVE = "INACTIVE";
@@ -18,43 +21,41 @@ public class MicrowaveOven implements Model {
 
     private final StateMachine stateMachine;
 
+    private boolean doorOpen;
+
     public MicrowaveOven() {
-        AtomicBoolean doorOpen = new AtomicBoolean(false);
+        this.doorOpen = false;
 
         this.stateMachine = new StateMachine("MICROWAVE OVEN")
 
-                .when(INACTIVE)
-                    .on(START)
-                    .and(() -> !doorOpen.get())
+                .given(INACTIVE)
+                    .when(START)
+                    .and(() -> !doorOpen)
                     .then(COOKING)
 
-                    .on(CLOSE_DOOR)
-                    .and(doorOpen::get)
-                    .then(() -> doorOpen.set(false))
-
-                .when(COOKING)
-                    .on(TIMER)
+                .given(COOKING)
+                    .when(TIMER)
                     .then(INACTIVE)
 
-                    .on(STOP)
+                    .when(STOP)
                     .then(INACTIVE)
 
-                    .on(OPEN_DOOR)
+                    .when(OPEN_DOOR)
                     .then(DOOR_OPEN)
-                    .then(() -> doorOpen.set(true))
+                    .then(() -> doorOpen = true)
 
-                .when(DOOR_OPEN)
-                    .on(CLOSE_DOOR)
-                    .then(() -> doorOpen.set(true))
+                .given(DOOR_OPEN)
+                    .when(CLOSE_DOOR)
+                    .then(() -> doorOpen = true)
                     .then(COOKING)
 
-                    .on(STOP)
+                    .when(STOP)
                     .then(INACTIVE);
     }
 
     @Override
     public void run() {
-        this.stateMachine.start(INACTIVE);;
+        this.stateMachine.start(INACTIVE);
     }
 
     @Override

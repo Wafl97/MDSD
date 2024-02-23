@@ -1,4 +1,4 @@
-package wafl.v2;
+package wafl.dsl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * @apiNote
  * Used for creating a statemachine using a simple syntax
  */
-public class StateMachine {
+public class StateMachine implements IStateMachine<StateMachine> {
 
     private final String name;
     private StateNode currentState;
@@ -93,11 +93,11 @@ public class StateMachine {
     }
 
     /**
-     * When the model is in a given state, this is then followed by "on"
+     * When the model is in a given state, this is then followed by "when"
      * @param state the given state
      * @return itself
      */
-    public StateMachine when(String state) {
+    public StateMachine given(String state) {
         this.stateNodes.putIfAbsent(state, new StateNode(state));
         this.nodeUnderConstruction = state;
         return this;
@@ -108,7 +108,7 @@ public class StateMachine {
      * @param input a given input
      * @return itself
      */
-    public StateMachine on(String input) {
+    public StateMachine when(String input) {
         this.outcomeBuilder = Outcome.newBuilder();
         this.inputUnderConstruction = input;
         return this;
@@ -137,7 +137,7 @@ public class StateMachine {
     }
 
     /**
-     * Run code when some conditions are met
+     * Run code given some conditions are met
      * @param callback will be called if the conditions provided are met
      * @return itself
      */

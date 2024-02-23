@@ -1,9 +1,9 @@
 import org.junit.Assert;
 import org.junit.Test;
-import wafl.v2.Callback;
-import wafl.v2.Condition;
-import wafl.v2.PrintMode;
-import wafl.v2.StateMachine;
+import wafl.dsl.Callback;
+import wafl.dsl.Condition;
+import wafl.dsl.PrintMode;
+import wafl.dsl.StateMachine;
 
 import java.util.*;
 
@@ -36,22 +36,22 @@ public class ModelTest {
                 .i(simulatedInputs::poll).o(simulatedOutputs::add) // set IO for the statemachine
 
                 // When the model is in state "S_A" and is given "B" as input it should change state to "S_B"
-                .when("S_A")
-                    .on("B")
+                .given("S_A")
+                    .when("B")
                     .then("S_B")
                 // When the model is in state "S_AB" and is given "C" as input it should end and run the callback
-                .when("S_A")
-                    .on("C")
+                .given("S_A")
+                    .when("C")
                     .end()
                 // When the model is in state "S_B" and is given "A" as input it should change state to "S_A"
-                .when("S_B")
-                    .on("A")
+                .given("S_B")
+                    .when("A")
                     .and(() -> true) // Simulated additional condition that must be met to change state
                     .then("S_A")
                     .then(() -> assertTrue(true))
                 // This should never get activated
-                .when("S_B")
-                    .on("B")
+                .given("S_B")
+                    .when("B")
                     .and(() -> false) // Should prevent this outcome from happening
                     .then("NEVER")
                     .then(Assert::fail)
@@ -84,12 +84,12 @@ public class ModelTest {
                 .printMode(PrintMode.TESTING) // Limit the outputs to only the current state of the model
                 .i(simulatedInputs::poll).o(simulatedOutputs::add) // set IO for the statemachine
 
-                .when("S_A")
-                    .on("B")
+                .given("S_A")
+                    .when("B")
                     .then("S_B")
 
-                .when("S_B")
-                    .on("C")
+                .given("S_B")
+                    .when("C")
                     .end()
 
                 .start("S_A");
@@ -120,17 +120,17 @@ public class ModelTest {
                 .printMode(PrintMode.TESTING) // Limit the outputs to only the current state of the model
                 .i(simulatedInputs::poll).o(simulatedOutputs::add) // set IO for the statemachine
 
-                .when("S_A")
-                    .on("A")
+                .given("S_A")
+                    .when("A")
                     .and(() -> false)
                     .then("NEVER")
-                .when("S_A")
-                    .on("B")
+                .given("S_A")
+                    .when("B")
                     .and(() -> true)
                     .then("S_B")
 
-                .when("S_B")
-                    .on("C")
+                .given("S_B")
+                    .when("C")
                     .end()
 
                 .start("S_A");
@@ -161,19 +161,19 @@ public class ModelTest {
                 .printMode(PrintMode.TESTING) // Limit the outputs to only the current state of the model
                 .i(simulatedInputs::poll).o(simulatedOutputs::add) // set IO for the statemachine
 
-                .when("S_A")
-                    .on("A")
+                .given("S_A")
+                    .when("A")
                     .and(() -> false)
                     .then("NEVER")
                     .then(Assert::fail)
-                .when("S_A")
-                    .on("B")
+                .given("S_A")
+                    .when("B")
                     .and(() -> true)
                     .then("S_B")
                     .then(() -> assertTrue(true))
 
-                .when("S_B")
-                    .on("C")
+                .given("S_B")
+                    .when("C")
                     .end()
 
                 .start("S_A");
@@ -197,20 +197,20 @@ public class ModelTest {
         // Test that it is consistent
         for (int i = 0; i < 10; i++) {
             StateMachine stateMachine = new StateMachine("TEST")
-                    .when("S_A")
-                        .on("B")
+                    .given("S_A")
+                        .when("B")
                         .then("S_B")
 
-                        .on("X")
+                        .when("X")
                         .and(con)
                         .end()
 
-                    .when("S_B")
-                        .on("A")
+                    .given("S_B")
+                        .when("A")
                         .then("S_A")
                         .then(call)
 
-                        .on("Y")
+                        .when("Y")
                         .then(call);
 
             String expected = String.format("""

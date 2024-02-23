@@ -1,9 +1,12 @@
 package wafl.models;
 
-import wafl.v2.StateMachine;
+import wafl.dsl.StateMachine;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * @author Marc L. W. Bertelsen
+ */
 public class CookingHood implements Model {
 
     private static final String OFF = "OFF";
@@ -15,41 +18,43 @@ public class CookingHood implements Model {
 
     private final StateMachine stateMachine;
 
+    private int power;
+
     public CookingHood() {
-        AtomicInteger power = new AtomicInteger(0);
+        this.power = 0;
 
         this.stateMachine = new StateMachine("COOKING HOOD")
 
-                .when(OFF)
-                    .on(PLUS)
+                .given(OFF)
+                    .when(PLUS)
                     .then(ON)
-                    .then(() -> power.set(1))
+                    .then(() -> power = 1)
 
-                .when(ON)
-                    .on(MINUS)
-                    .and(() -> power.get() == 1)
+                .given(ON)
+                    .when(MINUS)
+                    .and(() -> power == 1)
                     .then(OFF)
 
-                    .on(PLUS)
-                    .and(() -> power.get() == 6)
+                    .when(PLUS)
+                    .and(() -> power == 6)
                     .then(MAX)
 
-                    .on(PLUS)
-                    .and(() -> power.get() < 6)
-                    .then(power::getAndIncrement)
+                    .when(PLUS)
+                    .and(() -> power < 6)
+                    .then(() -> power++)
 
-                    .on(MINUS)
-                    .and(() -> power.get() == 1)
+                    .when(MINUS)
+                    .and(() -> power == 1)
                     .then(OFF)
 
-                    .on(MINUS)
-                    .and(() -> power.get() > 0)
-                    .then(power::getAndDecrement)
+                    .when(MINUS)
+                    .and(() -> power > 0)
+                    .then(() -> power--)
 
-                .when(MAX)
-                    .on(MINUS)
+                .given(MAX)
+                    .when(MINUS)
                     .then(ON)
-                    .then(() -> power.set(6));
+                    .then(() -> power = 6);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package wafl.v2;
+package wafl.dsl;
 
 import java.util.*;
 import java.util.stream.Collectors;
