@@ -27,7 +27,8 @@ public class Main {
         // make a statemachine for the statemachines
         StateMachine mainMenu = new StateMachine("MAIN");
         mainMenu
-                .given("MENU")
+                .given("MAIN MENU")
+
                     .when("MODELS")
                     .then("SELECT MACHINE")
 
@@ -52,7 +53,7 @@ public class Main {
 
                 .given("DEBUG MENU")
                     .when("BACK")
-                    .then("MENU")
+                    .then("MAIN MENU")
 
                     .when("MAIN")
                     .then(() -> System.out.println(mainMenu))
@@ -67,6 +68,6 @@ public class Main {
                     .then(() -> System.out.println(cookingHood))
 
                 .spawnTread()
-                .start("MENU");
+                .start("MAIN MENU");
     }
 }

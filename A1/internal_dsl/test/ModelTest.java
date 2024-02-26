@@ -1,11 +1,10 @@
 import org.junit.Assert;
 import org.junit.Test;
-import wafl.dsl.Callback;
-import wafl.dsl.Condition;
 import wafl.dsl.PrintMode;
 import wafl.dsl.StateMachine;
 
 import java.util.*;
+import java.util.function.Supplier;
 
 import static org.junit.Assert.*;
 
@@ -22,8 +21,8 @@ public class ModelTest {
             add("A"); // Expect state change to "S_A"
             add("C"); // Expect end
         }};
-        final Queue<String> simulatedOutputs = new LinkedList<>();
-        final Queue<String> expectedOutputs = new LinkedList<>()
+        final List<String> simulatedOutputs = new LinkedList<>();
+        final List<String> expectedOutputs = new LinkedList<>()
         {{
             add("S_A"); // Initial state
             add("S_B");
@@ -73,8 +72,8 @@ public class ModelTest {
             add("B"); // Expect state change to "S_B"
             add("C"); // Expect end
         }};
-        final Queue<String> simulatedOutputs = new LinkedList<>();
-        final Queue<String> expectedOutputs = new LinkedList<>()
+        final List<String> simulatedOutputs = new LinkedList<>();
+        final List<String> expectedOutputs = new LinkedList<>()
         {{
             add("S_A"); // Initial state
             add("S_B");
@@ -109,8 +108,8 @@ public class ModelTest {
             add("B"); // Expect state change to "S_B"
             add("C"); // Expect end
         }};
-        final Queue<String> simulatedOutputs = new LinkedList<>();
-        final Queue<String> expectedOutputs = new LinkedList<>()
+        final List<String> simulatedOutputs = new LinkedList<>();
+        final List<String> expectedOutputs = new LinkedList<>()
         {{
             add("S_A"); // Initial state
             add("S_B");
@@ -150,8 +149,8 @@ public class ModelTest {
             add("B"); // Expect state change to "S_B"
             add("C"); // Expect end
         }};
-        final Queue<String> simulatedOutputs = new LinkedList<>();
-        final Queue<String> expectedOutputs = new LinkedList<>()
+        final List<String> simulatedOutputs = new LinkedList<>();
+        final List<String> expectedOutputs = new LinkedList<>()
         {{
             add("S_A"); // Initial state
             add("S_B");
@@ -186,13 +185,75 @@ public class ModelTest {
     }
 
     @Test
+    public void badInitialStateTest() {
+        final Queue<String> simulatedInputs = new LinkedList<>();
+        final List<String> simulatedOutputs = new LinkedList<>();
+        final List<String> expectedOutputs = new LinkedList<>()
+        {{
+            add("ERROR - END");
+            // END
+        }};
+
+        new StateMachine("BAD")
+                .i(simulatedInputs::poll).o(simulatedOutputs::add)
+                .printMode(PrintMode.TESTING)
+                .given("S_A")
+                    .when("B")
+                    .then("S_B") // does not exist
+
+                    .when("X")
+                    .end()
+
+                .start("S_X");
+
+        // Check expected and simulated have same size
+        assertEquals(expectedOutputs.size(), simulatedOutputs.size());
+
+        // Check the order is the same
+        assertArrayEquals(expectedOutputs.toArray(), simulatedOutputs.toArray());
+    }
+
+    @Test
+    public void badStateChangeTest() {
+        final Queue<String> simulatedInputs = new LinkedList<>()
+        {{
+            add("B"); // Expect reset
+            add("X");
+            // END
+        }};
+        final List<String> simulatedOutputs = new LinkedList<>();
+        final List<String> expectedOutputs = new LinkedList<>()
+        {{
+            add("S_A"); // Initial state
+            add("ERROR - RESET");
+            // END
+        }};
+
+        new StateMachine("BAD")
+                .i(simulatedInputs::poll).o(simulatedOutputs::add)
+                .printMode(PrintMode.TESTING)
+                .given("S_A")
+                    .when("B")
+                    .then("S_B") // does not exist
+
+                    .when("X")
+                    .end()
+
+                .start("S_A");
+
+        // Check expected and simulated have same size
+        assertEquals(expectedOutputs.size(), simulatedOutputs.size());
+
+        // Check the order is the same
+        assertArrayEquals(expectedOutputs.toArray(), simulatedOutputs.toArray());
+    }
+
+    @Test
     public void abstractSyntaxTest() {
 
-        Condition con = () -> {
-            return true;
-        };
+        Supplier<Boolean> con = () -> true;
 
-        Callback call = () -> {};
+        Runnable call = () -> {};
 
         // Test that it is consistent
         for (int i = 0; i < 10; i++) {
@@ -220,17 +281,17 @@ public class ModelTest {
                 \t\t\tTHEN = S_B
                 \t\t]
                 \t\tON = X [
-                \t\t\tAND = %s
+                \t\t\tAND = (condition) %s
                 \t\t\tEND
                 \t\t]
                 \t]
                 \tWHEN = S_B [
                 \t\tON = A [
                 \t\t\tTHEN = S_A
-                \t\t\tTHEN = %s
+                \t\t\tTHEN = (callback) %s
                 \t\t]
                 \t\tON = Y [
-                \t\t\tTHEN = %s
+                \t\t\tTHEN = (callback) %s
                 \t\t]
                 \t]
                 }""", con, call, call);

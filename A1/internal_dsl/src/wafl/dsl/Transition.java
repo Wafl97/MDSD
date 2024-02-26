@@ -1,22 +1,23 @@
 package wafl.dsl;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 /**
  * @author Marc L. W. Bertelsen
  */
-public class Outcome {
+public class Transition {
 
-    private Condition condition;
+    private Supplier<Boolean> condition;
     private String nextState;
-    private Callback callback;
+    private Runnable callback;
     private boolean terminate;
 
-    private Outcome() {
+    private Transition() {
         this.terminate = false;
     }
 
-    public Optional<Condition> getCondition() {
+    public Optional<Supplier<Boolean>> getCondition() {
         return Optional.ofNullable(this.condition);
     }
 
@@ -24,7 +25,7 @@ public class Outcome {
         return Optional.ofNullable(this.nextState);
     }
 
-    public Optional<Callback> getCallback() {
+    public Optional<Runnable> getCallback() {
         return Optional.ofNullable(this.callback);
     }
 
@@ -35,9 +36,9 @@ public class Outcome {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        this.getCondition().ifPresent((c) -> builder.append(String.format("\t\t\tAND = %s\n", c)));
+        this.getCondition().ifPresent((c) -> builder.append(String.format("\t\t\tAND = (condition) %s\n", c)));
         this.getNextState().ifPresent((s) -> builder.append(String.format("\t\t\tTHEN = %s\n", s)));
-        this.getCallback().ifPresent((c) -> builder.append(String.format("\t\t\tTHEN = %s\n", c)));
+        this.getCallback().ifPresent((c) -> builder.append(String.format("\t\t\tTHEN = (callback) %s\n", c)));
         if (this.terminate()) {
             builder.append("\t\t\tEND\n");
         }
@@ -48,33 +49,33 @@ public class Outcome {
         return new Builder();
     }
     public static class Builder {
-        private final Outcome outcome;
+        private final Transition transition;
         private Builder() {
-            this.outcome = new Outcome();
+            this.transition = new Transition();
         }
 
         public Builder nextState(String nextState) {
-            this.outcome.nextState = nextState;
+            this.transition.nextState = nextState;
             return this;
         }
 
-        public Builder condition(Condition condition) {
-            this.outcome.condition = condition;
+        public Builder condition(Supplier<Boolean> condition) {
+            this.transition.condition = condition;
             return this;
         }
 
-        public Builder callback(Callback callback) {
-            this.outcome.callback = callback;
+        public Builder callback(Runnable callback) {
+            this.transition.callback = callback;
             return this;
         }
 
         public Builder terminate() {
-            this.outcome.terminate = true;
+            this.transition.terminate = true;
             return this;
         }
 
-        public Outcome build() {
-            return this.outcome;
+        public Transition build() {
+            return this.transition;
         }
     }
 }

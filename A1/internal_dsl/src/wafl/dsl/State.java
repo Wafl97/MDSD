@@ -1,27 +1,28 @@
 package wafl.dsl;
 
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
  * @author Marc L. W. Bertelsen
  */
-public class StateNode {
+public class State {
 
     private final String name;
-    private final Map<String, Set<Outcome>> inputs;
+    private final Map<String, Set<Transition>> transitions;
 
-    public StateNode(String name) {
+    public State(String name) {
         this.name = name;
-        this.inputs = new HashMap<>();
+        this.transitions = new HashMap<>();
     }
 
-    public void appendInput(String input, Outcome outcome) {
-        if (!this.inputs.containsKey(input)) {
-            this.inputs.put(input, new HashSet<>(){{add(outcome);}});
+    public void appendInput(String input, Transition transition) {
+        if (!this.transitions.containsKey(input)) {
+            this.transitions.put(input, new HashSet<>(){{add(transition);}});
             return;
         }
-        this.inputs.get(input).add(outcome);
+        this.transitions.get(input).add(transition);
 
     }
 
@@ -31,42 +32,42 @@ public class StateNode {
 
     public Optional<String> getNextState(String input) {
         // Check all conditions are met
-        if (!this.inputs.containsKey(input)) {
+        if (!this.transitions.containsKey(input)) {
             //System.out.printf("%s not found\n", input);
             return Optional.empty();
         }
         //System.out.printf("%s found checking conditions ... ", input);
-        for (Outcome outcome : this.inputs.get(input)) {
-            Optional<Condition> condition = outcome.getCondition();
+        for (Transition transition : this.transitions.get(input)) {
+            Optional<Supplier<Boolean>> condition = transition.getCondition();
             if (condition.isEmpty()) {
                 //System.out.print(" success\n");
-                return outcome.getNextState();
+                return transition.getNextState();
             }
-            if (condition.get().check()) {
+            if (condition.get().get()) {
                 //System.out.print(" success\n");
-                return outcome.getNextState();
+                return transition.getNextState();
             }
         }
         //System.out.print(" failure\n");
         return Optional.empty();
     }
 
-    public Optional<Callback> getCallback(String input) {
+    public Optional<Runnable> getCallback(String input) {
         // Check all conditions are met
-        if (!this.inputs.containsKey(input)) {
+        if (!this.transitions.containsKey(input)) {
             //System.out.printf("%s not found\n", input);
             return Optional.empty();
         }
         //System.out.printf("%s found checking conditions ... ", input);
-        for (Outcome outcome : this.inputs.get(input)) {
-            Optional<Condition> condition = outcome.getCondition();
+        for (Transition transition : this.transitions.get(input)) {
+            Optional<Supplier<Boolean>> condition = transition.getCondition();
             if (condition.isEmpty()) {
                 //System.out.print(" success\n");
-                return outcome.getCallback();
+                return transition.getCallback();
             }
-            if (condition.get().check()) {
+            if (condition.get().get()) {
                 //System.out.print(" success\n");
-                return outcome.getCallback();
+                return transition.getCallback();
             }
         }
         //System.out.print(" failure\n");
@@ -75,20 +76,20 @@ public class StateNode {
 
     public boolean willTerminate(String input) {
         // Check all conditions are met
-        if (!this.inputs.containsKey(input)) {
+        if (!this.transitions.containsKey(input)) {
             //System.out.printf("%s not found\n", input);
             return false;
         }
         //System.out.printf("%s found checking conditions ... ", input);
-        for (Outcome outcome : this.inputs.get(input)) {
-            Optional<Condition> condition = outcome.getCondition();
+        for (Transition transition : this.transitions.get(input)) {
+            Optional<Supplier<Boolean>> condition = transition.getCondition();
             if (condition.isEmpty()) {
                 //System.out.print(" success\n");
-                return outcome.terminate();
+                return transition.terminate();
             }
-            if (condition.get().check()) {
+            if (condition.get().get()) {
                 //System.out.print(" success\n");
-                return outcome.terminate();
+                return transition.terminate();
             }
         }
         //System.out.print(" failure\n");
@@ -97,17 +98,17 @@ public class StateNode {
 
     @Override
     public String toString() {
-        return this.inputs.keySet()
+        return this.transitions.keySet()
                 .stream()
                 .map(input -> String.format("\t\tON = %s [\n%s\t\t]", input,
-                    this.inputs.get(input)
+                    this.transitions.get(input)
                             .stream()
-                            .map(Outcome::toString)
+                            .map(Transition::toString)
                             .collect(Collectors.joining("\n\t\t\tOR\n\n"))))
                 .collect(Collectors.joining("\n"));
     }
 
     public void printAvailableInputs() {
-        System.out.printf("Available inputs: [%s]\n", String.join(", ",this.inputs.keySet()));
+        System.out.printf("Available input(s): [%s]\n", String.join(", ",this.transitions.keySet()));
     }
 }

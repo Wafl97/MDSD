@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -16,8 +17,9 @@ import java.util.stream.Collectors;
 public class StateMachine implements IStateMachine<StateMachine> {
 
     private final String name;
-    private StateNode currentState;
-    private final Map<String,StateNode> stateNodes;
+    private String initialState;
+    private State currentState;
+    private final Map<String, State> stateNodes;
     private PrintMode printMode;
     private Input input;
     private Output output;
@@ -28,7 +30,7 @@ public class StateMachine implements IStateMachine<StateMachine> {
     // Used for construction
     private String nodeUnderConstruction;
     private String inputUnderConstruction;
-    private Outcome.Builder outcomeBuilder;
+    private Transition.Builder transistionBuilder;
 
     public StateMachine(final String name) {
         this.name = name;
@@ -98,7 +100,7 @@ public class StateMachine implements IStateMachine<StateMachine> {
      * @return itself
      */
     public StateMachine given(String state) {
-        this.stateNodes.putIfAbsent(state, new StateNode(state));
+        this.stateNodes.putIfAbsent(state, new State(state));
         this.nodeUnderConstruction = state;
         return this;
     }
@@ -109,7 +111,7 @@ public class StateMachine implements IStateMachine<StateMachine> {
      * @return itself
      */
     public StateMachine when(String input) {
-        this.outcomeBuilder = Outcome.newBuilder();
+        this.transistionBuilder = Transition.newBuilder();
         this.inputUnderConstruction = input;
         return this;
     }
@@ -119,8 +121,8 @@ public class StateMachine implements IStateMachine<StateMachine> {
      * @param condition an additional condition than must be met
      * @return itself
      */
-    public StateMachine and(Condition condition) {
-        this.outcomeBuilder.condition(condition);
+    public StateMachine and(Supplier<Boolean> condition) {
+        this.transistionBuilder.condition(condition);
         return this;
     }
 
@@ -130,9 +132,9 @@ public class StateMachine implements IStateMachine<StateMachine> {
      * @return itself
      */
     public StateMachine then(String state) {
-        this.outcomeBuilder.nextState(state);
+        this.transistionBuilder.nextState(state);
         this.stateNodes.get(this.nodeUnderConstruction)
-                .appendInput(this.inputUnderConstruction, this.outcomeBuilder.build());
+                .appendInput(this.inputUnderConstruction, this.transistionBuilder.build());
         return this;
     }
 
@@ -141,10 +143,10 @@ public class StateMachine implements IStateMachine<StateMachine> {
      * @param callback will be called if the conditions provided are met
      * @return itself
      */
-    public StateMachine then(Callback callback) {
-        this.outcomeBuilder.callback(callback);
+    public StateMachine then(Runnable callback) {
+        this.transistionBuilder.callback(callback);
         this.stateNodes.get(this.nodeUnderConstruction)
-                .appendInput(this.inputUnderConstruction, this.outcomeBuilder.build());
+                .appendInput(this.inputUnderConstruction, this.transistionBuilder.build());
         return this;
     }
 
@@ -153,19 +155,21 @@ public class StateMachine implements IStateMachine<StateMachine> {
      * @return itself
      */
     public StateMachine end() {
-        this.outcomeBuilder.terminate();
+        this.transistionBuilder.terminate();
         this.stateNodes.get(this.nodeUnderConstruction)
-                .appendInput(this.inputUnderConstruction, this.outcomeBuilder.build());
+                .appendInput(this.inputUnderConstruction, this.transistionBuilder.build());
         return this;
     }
 
     /**
      * Start the model <br/>
-     * Mote: this has to be the last method in the chain, everything after is ignored
+     * Note: this has to be the last method in the chain, everything after is ignored. <br/>
+     * Will block unless {@link StateMachine#spawnTread()} is used before.
      * @param initialState the initial state of the model
      * @return itself
      */
     public StateMachine start(String initialState) {
+        this.initialState = initialState;
 
         if (this.printMode.order >= PrintMode.MAXIMAL.order) {
             System.out.println(this);
@@ -202,8 +206,8 @@ public class StateMachine implements IStateMachine<StateMachine> {
                 }
             }
 
-            Optional<Callback> callback = this.currentState.getCallback(line);
-            callback.ifPresent(Callback::call);
+            Optional<Runnable> callback = this.currentState.getCallback(line);
+            callback.ifPresent(Runnable::run);
 
             Optional<String> nextState = this.currentState.getNextState(line);
             nextState.ifPresent(this::setState);
@@ -212,7 +216,29 @@ public class StateMachine implements IStateMachine<StateMachine> {
     }
 
     private void setState(String newState) {
+        State state = this.stateNodes.get(newState);
+
+        // state not defined
+        if (state == null) {
+            // initial state
+            if (this.currentState == null) {
+                this.output.out(this.printMode.order > PrintMode.TESTING.order ?
+                        String.format("Initial state [%s] is not defined, shutting down\n", newState) :
+                        "ERROR - END");
+                this.doRun = false;
+                return;
+            }
+            // no initial state
+            this.output.out(this.printMode.order > PrintMode.TESTING.order ?
+                    String.format("Given state [%s] is not defined, resetting to initial state [%s]\n",
+                            newState, this.initialState) :
+                    "ERROR - RESET");
+            this.currentState = this.stateNodes.get(this.initialState);
+            return;
+        }
+        // state defined
         if (this.printMode.order >= PrintMode.NORMAL.order) {
+            // initial state
             if (this.currentState == null) {
                 this.output.out(String.format("Initial state: [%s]\n", newState));
             } else {
@@ -222,7 +248,7 @@ public class StateMachine implements IStateMachine<StateMachine> {
         else if (this.printMode.order == PrintMode.TESTING.order) {
             this.output.out(newState);
         }
-        this.currentState = this.stateNodes.get(newState);
+        this.currentState = state;
     }
 
     @Override
