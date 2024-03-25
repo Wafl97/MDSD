@@ -1,0 +1,9 @@
+model COOKING HOOD
+    state OFF
+        PLUS to ON
+    state ON
+        MINUS to OFF
+        PLUS to MAX
+    state MAX
+        MINUS to ON
+    initial OFF

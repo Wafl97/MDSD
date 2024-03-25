@@ -1,0 +1,14 @@
+model CD PLAYER
+    state STOPPED
+        PLAY to PLAYING
+        FORWARD to STOPPED
+        BACKWARD to STOPPED
+    state PLAYING
+        STOP to STOPPED
+        PAUSE to PAUSED
+    state PAUSED
+        PLAY to PLAYING
+        STOP to STOPPED
+        FORWARD to PAUSED
+        BACKWARD to PAUSED
+    initial STOPPED

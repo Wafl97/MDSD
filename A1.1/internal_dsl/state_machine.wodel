@@ -1,0 +1,12 @@
+model MICROWAVE OVEN
+    state INACTIVE
+        START to COOKING
+        EXIT end
+    state COOKING
+        TIMER to INACTIVE
+        STOP to INACTIVE
+        OPEN_DOOR to DOOR_OPEN
+    state DOOR_OPEN
+        DOOR_CLOSE to COOKING
+        STOP to INACTIVE
+    initial INACTIVE

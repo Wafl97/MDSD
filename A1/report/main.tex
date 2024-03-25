@@ -37,11 +37,11 @@
 
 \section{Desing}
 
-Designing the API for representing state machines, firstly requires abstracting the commonalities present for all state machines, this can be acomplished by creating a metamodel.
+Designing the API for representing state machines, firstly requires abstracting the commonalities present for all state machines, this can be accomplished by creating a metamodel.
 
 \subsection{Metamodel}
 
-Noting what parts a state machine is made of: the overall state machine itself, the individual states, and the transitions between the states. The state machine has a currnet state, as well as the possible other states that it can transition to. States have transitions that can happend based on external factors like input and conditional logic. Transistion can result in four differnt outcomes:
+Noting what parts, a state machine is made of: the overall state machine itself, the individual states, and the transitions between the states. The state machine has a current state, as well as the possible other states that it can transition to. States have transitions that can happen based on external factors like input and conditional logic. Transition can result in four different outcomes:
 
 \begin{enumerate}
     \item the state machine goes to a new state.
@@ -56,7 +56,8 @@ Noting what parts a state machine is made of: the overall state machine itself, 
         \begin{class}{StateMachine}{0,0}{
             \attribute{- currentState: State}
         }
-        \end{class}\begin{class}{State}{0,-2}{
+        \end{class}
+        \begin{class}{State}{0,-2}{
         }
         \end{class}
         \begin{class}{Tranistion}{0,-4}{
@@ -92,12 +93,12 @@ The intent is it create a syntax that will read like:\\
     T gien(String state);
 \end{lstlisting}
 
-\textbf{when} - Specify the input that will cause a tranistion.
+\textbf{when} - Specify the input that will cause a transition.
 \begin{lstlisting}[language=java]
     T when(String input);
 \end{lstlisting}
 
-\textbf{and} - Add an additional constraint that must be met to cause the tranistion.
+\textbf{and} - Add an additional constraint that must be met to cause the transition.
 \begin{lstlisting}[language=java]
     T and(Supplier<Boolean> condition);
 \end{lstlisting}
@@ -107,12 +108,12 @@ The intent is it create a syntax that will read like:\\
     T then(String nextState);
 \end{lstlisting}
 
-\textbf{then} - Specify some code that will be run with the tranistion.
+\textbf{then} - Specify some code that will be run with the transition.
 \begin{lstlisting}[language=java]
     T then(Runnable callback);
 \end{lstlisting}
 
-\textbf{end} - Specify that a tranistion will lead to an end state.
+\textbf{end} - Specify that a transition will lead to an end state.
 \begin{lstlisting}[language=java]
     T end();
 \end{lstlisting}
@@ -124,7 +125,7 @@ The intent is it create a syntax that will read like:\\
 
 \subsubsection{Interfaces}
 
-The syntax design results in the \textbf{IStateMachine} interface. Making the interface generic allows for the implmentation to specify the return type as itself, which in turn will allow for chaining the method calls.
+The syntax design results in the \textbf{IStateMachine} interface. Making the interface generic allows for the implementation to specify the return type as itself, which in turn will allow for chaining the method calls.
 
 \begin{lstlisting}[language=java, caption={State Machine Interface}, captionpos=b]
     public interface IStateMachine<T> {
@@ -146,7 +147,7 @@ The syntax design results in the \textbf{IStateMachine} interface. Making the in
 
 \subsection{State Machines}
 
-This subsection features the code representation of the three state machines: CD Player, Microwave Oven, and Cooking Hood. All the code listings featured are simplified from the actual implemntations, as to only show the usage of the API.
+This subsection features the code representation of the three state machines: CD Player, Microwave Oven, and Cooking Hood. All the code listings featured are simplified from the actual implementations, as to only show the usage of the API.
 
 \subsubsection{CD Player}
 
@@ -280,7 +281,7 @@ This subsection features the code representation of the three state machines: CD
 
 \section{Test}
 
-For the purpose of testing, three additional method are added to the statemachine implemntation: i(input), o(output), and printMode. Theese allow for configuring the input and output for the statemachine, as well as how much info it outputs. Default for input and output is \textbf{System.in} and \textbf{System.out}, respectively, with printMode defaulting to \textbf{NORMAL}.
+For the purpose of testing, three additional methods are added to the state machine implementation: i(input), o(output), and printMode. These allow for configuring the input and output for the state machine, as well as how much info it outputs. Default for input and output is \textbf{System.in} and \textbf{System.out}, respectively, with printMode defaulting to \textbf{NORMAL}.
 
 \subsection{Simulating Input and Output}
 
@@ -327,7 +328,7 @@ Different tests have been written to test the flow from state to state, as well 
 
 \section{Conclusion}
 
-The resulting API is able to capture the logic from all three state machine diagrams, in addition to the main program having a state machine for selecting each of the implemenations to run. So the API is usable for its intented purpose.\\
+The resulting API is able to capture the logic from all three state machine diagrams, in addition to the main program having a state machine for selecting each of the implementations to run. So, the API is usable for its intended purpose.\\
 Creating an API based on the commonalities of the different state machines, made implementing each trivial, with the added benefit of easily being able to add and change the logic without huge refactors.
 
 \end{document}
