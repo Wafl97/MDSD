@@ -54,67 +54,92 @@
 
 \pagebreak
 
+\section{Summary}
+
+\begin{itemize}
+    \item XText grammer - done
+    \item XTend generator - done
+    \item XTend validator - done
+    \item XTend scoping - todo
+    \item Tests \begin{itemize}
+        \item MathExampleTest - all pass
+        \item MathParsingTest - all pass
+        \item MathScopeTest - error
+        \item MathValidatorTest - all pas
+    \end{itemize}
+\end{itemize}
+
 \section{Desing}
-\todo{design}
-% how to structure a math expression
-% has to fit the syntax of the existing tests 
+
+Important for the design of the metamodel and syntax, is the enforcement of mathematical operation exetuction. This has to implementated with the already given syntax from the test cases.
 
 \subsection{Metamodel}
-\todo{metamodel}
 
-% Expression
-% Presidence of operations: mult - div -> add - sub
+Fig.~\ref{fig:metamoel}, show a simple metamodel for the design of a math interpreter. By structuing the model such that the different expression sub-types share a common base class, it enables the usage of a single function for the expression computations. Additionally, the structure on the metamodel enforces the corret order of mathematical operations, by the way the expression tree is composed. Addition and subtration at the top, this will happen last in the order of operation. Multiplication and division is below, witch means they will exetuce one step before. All the Primary sub-types require even earlier computation, so they are placed deeper in the tree.
 
-% EXPR
-%   left (operation right)?
-%   left could be product or quotient (mult or div)
-%   left could be sum or difference (plus or minus)
-%   left could be constant
-
-\todo{redo}
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}
-        \begin{class}{MathExpression}{0,0}{
+        \begin{class}[text width=6cm]{MathExpression}{0,0}{
             \attribute{+ id : String}
+            \operation{+ compute() : Map<String, Integer>}
         }
         \end{class}
-        \begin{class}{Expression}{0,-2.5}{
-            \operation{+ computeExp() : Expression}
+        \begin{class}{Expression}{0,-5}{
+            \operation{+ computeExp() : int}
         }
         \end{class}
-        \begin{class}{SumDifference}{-3,-6}{
+        \begin{class}{SumDifference}{-3.5,-2.5}{
             \attribute{+ left : ProductQoutient}
-            \attribute{+ right : ProductQoutient}
+            \attribute{+ right : ProductQoutient?}
         }
         \inherit{Expression}
         \end{class}
-        \begin{class}{ProductQoutient}{0,-8}{
+        \begin{class}{ProductQoutient}{3.5,-2.5}{
             \attribute{+ left : Primary}
-            \attribute{+ right : Primary}
+            \attribute{+ right : Primary?}
         }
         \inherit{Expression}
         \end{class}
-        \begin{class}{Constant}{3,-6}{
+        \begin{class}{Primary}{0, -9.25}{
+        }
+        \inherit{Expression}
+        \end{class}
+        \begin{class}{Parenthesis}{3.5,-7}{
+            \attribute{+ expression : SumDifference}
+        }
+        \inherit{Primary}
+        \end{class}
+        \begin{class}{Constant}{-3.5,-7}{
             \attribute{+ value : int}
         }
-        \inherit{Expression}
+        \inherit{Primary}
         \end{class}
-        \composition{MathExpression}{}{1}{Expression}
+        \begin{class}{VariableUse}{3.5,-11.25}{
+            \attribute{+ ref : string}
+        }
+        \inherit{Primary}
+        \end{class}
+        \begin{class}{VariableBinding}{-3.5,-11.25}{
+            \attribute{+ id : string}
+            \attribute{+ binding : SumDifference}
+            \attribute{+ body : SumDifference}
+        }
+        \inherit{Primary}
+        \end{class}
+        \composition{MathExpression}{}{1..*}{Expression}
     \end{tikzpicture}
     \caption{Mathematical Expression Metamodel}
+    \label{fig:metamoel}
 \end{figure}
     
 
 \subsection{Syntax}
 
-% number
+The syntax is already given in the different test cases. So, the resulting \textit{XText} grammer has to accommodate syntax as seen in fig.~\ref{lst:syntax}
 
-% equation
-% var ref
-% var binding
 \begin{center}
-    \begin{lstlisting}[language={math}, captionpos={b}, caption={Examples of *.math syntax}]
+    \begin{lstlisting}[language={math}, captionpos={b}, caption={Examples of *.math syntax}, label={lst:syntax}]
         var a = 1
         var b = 1 + 1
         var c = a + b
@@ -123,6 +148,8 @@
 \end{center}
 
 \section{Implmentation}
+
+Repo: \url{https://github.com/Wafl97/MDSD/tree/main/A2/assignment2}
 
 \subsection{XText syntax}
 \begin{lstlisting}[caption={XText syntax}, captionpos={b}]
@@ -223,6 +250,9 @@ def static Map<String, Integer> bind(
 \end{lstlisting}
 
 \subsection{XTend Validator}
+
+Checking for dublicate var declarations. This is done with a Set, that is cleared when checking the \textbf{MathExp} since it is the first thing that is checked. Hereafter each of the \textbf{Exps} are checked to see if they are in the Set, if yes, then issue a warning and return, if no, add it to the set.
+
 \begin{lstlisting}[language={xtend}, caption={XTend validator}, captionpos={b}]
 public static val DUBLICATE_VAR = 'dublicateVar'
 
@@ -246,7 +276,6 @@ def checkNoDublicateVar(Exp exp) {
 }
 \end{lstlisting}
 \section{Test}
-\todo{test results}
 % if i can get it to work :)
 
 Current implmentation passes \textbf{MathExampleTest}, \textbf{MathParsingTest}, and \textbf{MathValidatorTest}, but failes \textbf{MathScopeTest}.
@@ -257,7 +286,9 @@ Current implmentation passes \textbf{MathExampleTest}, \textbf{MathParsingTest},
 \end{figure}
 
 \section{Conclusion}
-\todo{conclusion}
-% using 
+
+The current implementation solves most of the test, however there might be a more elegant solution for solving the \textit{evilExample} test, by using better \textbf{XText} grammer. How it is solved currently feels like a bit of a hack.
+
+
 
 \end{document}
