@@ -45,33 +45,33 @@ class MathGenerator extends AbstractGenerator {
 	def static Map<String, Integer> compute(MathExp math) {
 		val variables = new HashMap<String, Integer>()
 		
-		val tmp = new HashMap<String, Expression>()
-		math.exps.forEach[exp | tmp.put(exp.name, exp.exp)]
+		val fwExp = new HashMap<String, Expression>()
+		math.exps.forEach[exp | fwExp.put(exp.name, exp.exp)]
 		
 		math.exps.forEach[exp | {
-			val res = exp.exp.computeExp(variables, tmp)			
+			val res = exp.exp.computeExp(variables, fwExp)			
 			variables.put(exp.name, res)
 		}]
 		return variables
 	}
 	
-	def static int computeExp(Expression exp, Map<String, Integer> vars, Map<String, Expression> tmp) {
+	def static int computeExp(Expression exp, Map<String, Integer> vars, Map<String, Expression> fwExp) {
 		switch exp {
-			Add: exp.left.computeExp(vars, tmp)+exp.right.computeExp(vars, tmp)
-			Sub: exp.left.computeExp(vars, tmp)-exp.right.computeExp(vars, tmp)
-			Mul: exp.left.computeExp(vars, tmp)*exp.right.computeExp(vars, tmp)
-			Div: exp.left.computeExp(vars, tmp)/exp.right.computeExp(vars, tmp)
+			Add: exp.left.computeExp(vars, fwExp)+exp.right.computeExp(vars, fwExp)
+			Sub: exp.left.computeExp(vars, fwExp)-exp.right.computeExp(vars, fwExp)
+			Mul: exp.left.computeExp(vars, fwExp)*exp.right.computeExp(vars, fwExp)
+			Div: exp.left.computeExp(vars, fwExp)/exp.right.computeExp(vars, fwExp)
 			Constant: exp.value
-			Parenthesis: exp.exp.computeExp(vars, tmp)
+			Parenthesis: exp.exp.computeExp(vars, fwExp)
 			VariableUse:
 			{
 				if (!vars.keySet.contains(exp.ref)) {
-					val res = tmp.get(exp.ref).computeExp(vars, tmp)
+					val res = fwExp.get(exp.ref).computeExp(vars, fwExp)
 					vars.put(exp.ref, res)
 				}
 				vars.get(exp.ref)
 			}
-			VariableBinding: exp.body.computeExp(vars.bind(exp.id, exp.binding.computeExp(vars, tmp)), tmp)
+			VariableBinding: exp.body.computeExp(vars.bind(exp.id, exp.binding.computeExp(vars, fwExp)), fwExp)
 			default: throw new Error("Could not compute expression")
 		}
 	}

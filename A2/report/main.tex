@@ -71,11 +71,11 @@
 
 \section{Desing}
 
-Important for the design of the metamodel and syntax, is the enforcement of mathematical operation exetuction. This has to implementated with the already given syntax from the test cases.
+Important for the design of the metamodel and syntax, is the enforcement of mathematical operation execution. This must be implemented with the already given syntax from the test cases.
 
 \subsection{Metamodel}
 
-Fig.~\ref{fig:metamoel}, show a simple metamodel for the design of a math interpreter. By structuing the model such that the different expression sub-types share a common base class, it enables the usage of a single function for the expression computations. Additionally, the structure on the metamodel enforces the corret order of mathematical operations, by the way the expression tree is composed. Addition and subtration at the top, this will happen last in the order of operation. Multiplication and division is below, witch means they will exetuce one step before. All the Primary sub-types require even earlier computation, so they are placed deeper in the tree.
+Fig.~\ref{fig:metamoel}, show a simple metamodel for the design of a math interpreter. By structuring the model such that the different expression sub-types share a common base class, it enables the usage of a single function for the expression computations. Additionally, the structure on the metamodel enforces the correct order of mathematical operations, by the way the expression tree is composed. Addition and subtraction at the top, this will happen last in the order of operation. Multiplication and division are below, which means they will execute one step before. All the Primary sub-types require even earlier computation, so they are placed deeper in the tree.
 
 \begin{figure}[H]
     \centering
@@ -136,7 +136,7 @@ Fig.~\ref{fig:metamoel}, show a simple metamodel for the design of a math interp
 
 \subsection{Syntax}
 
-The syntax is already given in the different test cases. So, the resulting \textit{XText} grammer has to accommodate syntax as seen in fig.~\ref{lst:syntax}
+The syntax is already given in the different test cases. So, the resulting \textit{XText} grammar has to accommodate syntax as seen in fig.~\ref{lst:syntax}
 
 \begin{center}
     \begin{lstlisting}[language={math}, captionpos={b}, caption={Examples of *.math syntax}, label={lst:syntax}]
@@ -195,7 +195,10 @@ VariableBinding returns Expression:
 \end{lstlisting}
 
 \subsection{XTend Generator}
-% just the computation code
+
+For solving the \textit{evilExample} test, a map for getting variables, that is yet to be computed, was used. This way if the variableBinding can get variables before they are computed and compute its associated expression.\\
+Since all the sub-expression types are all derived from the same super class (\textbf{Expression}) it is possible to use the same function (\textbf{computeExp}) to compute the value based on the sub-type.
+
 \begin{lstlisting}[language={xtend}, caption={XTend generator}, captionpos={b}]
 override void doGenerate(
     Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
@@ -208,35 +211,35 @@ override void doGenerate(
 def static Map<String, Integer> compute(MathExp math) {
     val variables = new HashMap<String, Integer>()
     
-    val tmp = new HashMap<String, Expression>()
-    math.exps.forEach[exp | tmp.put(exp.name, exp.exp)]
+    val fwExp = new HashMap<String, Expression>()
+    math.exps.forEach[exp | fwExp.put(exp.name, exp.exp)]
     
     math.exps.forEach[exp | {
-        val res = exp.exp.computeExp(variables, tmp)			
+        val res = exp.exp.computeExp(variables, fwExp)         
         variables.put(exp.name, res)
     }]
     return variables
 }
 
 def static int computeExp(
-    Expression exp, Map<String, Integer> vars, Map<String, Expression> tmp) {
+    Expression exp, Map<String, Integer> vars, Map<String, Expression> fwExp) {
     switch exp {
-        Add: exp.left.computeExp(vars, tmp)+exp.right.computeExp(vars, tmp)
-        Sub: exp.left.computeExp(vars, tmp)-exp.right.computeExp(vars, tmp)
-        Mul: exp.left.computeExp(vars, tmp)*exp.right.computeExp(vars, tmp)
-        Div: exp.left.computeExp(vars, tmp)/exp.right.computeExp(vars, tmp)
+        Add: exp.left.computeExp(vars, fwExp)+exp.right.computeExp(vars, fwExp)
+        Sub: exp.left.computeExp(vars, fwExp)-exp.right.computeExp(vars, fwExp)
+        Mul: exp.left.computeExp(vars, fwExp)*exp.right.computeExp(vars, fwExp)
+        Div: exp.left.computeExp(vars, fwExp)/exp.right.computeExp(vars, fwExp)
         Constant: exp.value
-        Parenthesis: exp.exp.computeExp(vars, tmp)
+        Parenthesis: exp.exp.computeExp(vars, fwExp)
         VariableUse:
         {
             if (!vars.keySet.contains(exp.ref)) {
-                val res = tmp.get(exp.ref).computeExp(vars, tmp)
+                val res = fwExp.get(exp.ref).computeExp(vars, fwExp)
                 vars.put(exp.ref, res)
             }
             vars.get(exp.ref)
         }
         VariableBinding: exp.body.computeExp(
-            vars.bind(exp.id, exp.binding.computeExp(vars, tmp)), tmp)
+            vars.bind(exp.id, exp.binding.computeExp(vars, fwExp)), fwExp)
         default: throw new Error("Could not compute expression")
     }
 }
@@ -251,7 +254,7 @@ def static Map<String, Integer> bind(
 
 \subsection{XTend Validator}
 
-Checking for dublicate var declarations. This is done with a Set, that is cleared when checking the \textbf{MathExp} since it is the first thing that is checked. Hereafter each of the \textbf{Exps} are checked to see if they are in the Set, if yes, then issue a warning and return, if no, add it to the set.
+Checking for duplicate var declarations. This is done with a Set, that is cleared when checking the \textbf{MathExp} since it is the first thing that is checked. Hereafter each of the \textbf{Exps} are checked to see if they are in the Set, if yes, then issue a warning and return, if no, add it to the set.
 
 \begin{lstlisting}[language={xtend}, caption={XTend validator}, captionpos={b}]
 public static val DUBLICATE_VAR = 'dublicateVar'
@@ -283,12 +286,12 @@ Current implmentation passes \textbf{MathExampleTest}, \textbf{MathParsingTest},
 \begin{figure}[H]
     \centering
     \includegraphics{tests.PNG}
+    \caption{Test Results}
 \end{figure}
 
 \section{Conclusion}
 
-The current implementation solves most of the test, however there might be a more elegant solution for solving the \textit{evilExample} test, by using better \textbf{XText} grammer. How it is solved currently feels like a bit of a hack.
-
+The current implementation solves most of the test, however there might be a more elegant solution for solving the \textit{evilExample} test, by using better \textbf{XText} grammar. How it is solved currently feels like a bit of a hack.
 
 
 \end{document}
