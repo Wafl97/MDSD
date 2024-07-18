@@ -6,15 +6,16 @@ package dk.sdu.mmmi.mdsd.math.impl;
 import dk.sdu.mmmi.mdsd.math.Add;
 import dk.sdu.mmmi.mdsd.math.Constant;
 import dk.sdu.mmmi.mdsd.math.Div;
-import dk.sdu.mmmi.mdsd.math.Exp;
+import dk.sdu.mmmi.mdsd.math.Experssion;
 import dk.sdu.mmmi.mdsd.math.Expression;
+import dk.sdu.mmmi.mdsd.math.LetBinding;
 import dk.sdu.mmmi.mdsd.math.MathExp;
 import dk.sdu.mmmi.mdsd.math.MathFactory;
 import dk.sdu.mmmi.mdsd.math.MathPackage;
 import dk.sdu.mmmi.mdsd.math.Mul;
 import dk.sdu.mmmi.mdsd.math.Parenthesis;
 import dk.sdu.mmmi.mdsd.math.Sub;
-import dk.sdu.mmmi.mdsd.math.VariableBinding;
+import dk.sdu.mmmi.mdsd.math.VarBinding;
 import dk.sdu.mmmi.mdsd.math.VariableUse;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -44,7 +45,7 @@ public class MathPackageImpl extends EPackageImpl implements MathPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass expEClass = null;
+  private EClass varBindingEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -52,6 +53,13 @@ public class MathPackageImpl extends EPackageImpl implements MathPackage
    * @generated
    */
   private EClass expressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass experssionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -107,7 +115,7 @@ public class MathPackageImpl extends EPackageImpl implements MathPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass variableBindingEClass = null;
+  private EClass letBindingEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -199,9 +207,9 @@ public class MathPackageImpl extends EPackageImpl implements MathPackage
    * @generated
    */
   @Override
-  public EClass getExp()
+  public EClass getVarBinding()
   {
-    return expEClass;
+    return varBindingEClass;
   }
 
   /**
@@ -210,9 +218,9 @@ public class MathPackageImpl extends EPackageImpl implements MathPackage
    * @generated
    */
   @Override
-  public EAttribute getExp_Name()
+  public EAttribute getVarBinding_Name()
   {
-    return (EAttribute)expEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)varBindingEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -221,9 +229,9 @@ public class MathPackageImpl extends EPackageImpl implements MathPackage
    * @generated
    */
   @Override
-  public EReference getExp_Exp()
+  public EReference getVarBinding_Exp()
   {
-    return (EReference)expEClass.getEStructuralFeatures().get(1);
+    return (EReference)varBindingEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -235,6 +243,17 @@ public class MathPackageImpl extends EPackageImpl implements MathPackage
   public EClass getExpression()
   {
     return expressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getExperssion()
+  {
+    return experssionEClass;
   }
 
   /**
@@ -441,9 +460,9 @@ public class MathPackageImpl extends EPackageImpl implements MathPackage
    * @generated
    */
   @Override
-  public EClass getVariableBinding()
+  public EClass getLetBinding()
   {
-    return variableBindingEClass;
+    return letBindingEClass;
   }
 
   /**
@@ -452,9 +471,9 @@ public class MathPackageImpl extends EPackageImpl implements MathPackage
    * @generated
    */
   @Override
-  public EAttribute getVariableBinding_Id()
+  public EAttribute getLetBinding_Name()
   {
-    return (EAttribute)variableBindingEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)letBindingEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -463,9 +482,9 @@ public class MathPackageImpl extends EPackageImpl implements MathPackage
    * @generated
    */
   @Override
-  public EReference getVariableBinding_Binding()
+  public EReference getLetBinding_Binding()
   {
-    return (EReference)variableBindingEClass.getEStructuralFeatures().get(1);
+    return (EReference)letBindingEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -474,9 +493,9 @@ public class MathPackageImpl extends EPackageImpl implements MathPackage
    * @generated
    */
   @Override
-  public EReference getVariableBinding_Body()
+  public EReference getLetBinding_Body()
   {
-    return (EReference)variableBindingEClass.getEStructuralFeatures().get(2);
+    return (EReference)letBindingEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -513,11 +532,13 @@ public class MathPackageImpl extends EPackageImpl implements MathPackage
     mathExpEClass = createEClass(MATH_EXP);
     createEReference(mathExpEClass, MATH_EXP__EXPS);
 
-    expEClass = createEClass(EXP);
-    createEAttribute(expEClass, EXP__NAME);
-    createEReference(expEClass, EXP__EXP);
+    varBindingEClass = createEClass(VAR_BINDING);
+    createEAttribute(varBindingEClass, VAR_BINDING__NAME);
+    createEReference(varBindingEClass, VAR_BINDING__EXP);
 
     expressionEClass = createEClass(EXPRESSION);
+
+    experssionEClass = createEClass(EXPERSSION);
 
     addEClass = createEClass(ADD);
     createEReference(addEClass, ADD__LEFT);
@@ -544,10 +565,10 @@ public class MathPackageImpl extends EPackageImpl implements MathPackage
     variableUseEClass = createEClass(VARIABLE_USE);
     createEAttribute(variableUseEClass, VARIABLE_USE__REF);
 
-    variableBindingEClass = createEClass(VARIABLE_BINDING);
-    createEAttribute(variableBindingEClass, VARIABLE_BINDING__ID);
-    createEReference(variableBindingEClass, VARIABLE_BINDING__BINDING);
-    createEReference(variableBindingEClass, VARIABLE_BINDING__BODY);
+    letBindingEClass = createEClass(LET_BINDING);
+    createEAttribute(letBindingEClass, LET_BINDING__NAME);
+    createEReference(letBindingEClass, LET_BINDING__BINDING);
+    createEReference(letBindingEClass, LET_BINDING__BODY);
   }
 
   /**
@@ -579,6 +600,7 @@ public class MathPackageImpl extends EPackageImpl implements MathPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    experssionEClass.getESuperTypes().add(this.getExpression());
     addEClass.getESuperTypes().add(this.getExpression());
     subEClass.getESuperTypes().add(this.getExpression());
     mulEClass.getESuperTypes().add(this.getExpression());
@@ -586,17 +608,19 @@ public class MathPackageImpl extends EPackageImpl implements MathPackage
     parenthesisEClass.getESuperTypes().add(this.getExpression());
     constantEClass.getESuperTypes().add(this.getExpression());
     variableUseEClass.getESuperTypes().add(this.getExpression());
-    variableBindingEClass.getESuperTypes().add(this.getExpression());
+    letBindingEClass.getESuperTypes().add(this.getExperssion());
 
     // Initialize classes and features; add operations and parameters
     initEClass(mathExpEClass, MathExp.class, "MathExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getMathExp_Exps(), this.getExp(), null, "exps", null, 0, -1, MathExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMathExp_Exps(), this.getVarBinding(), null, "exps", null, 0, -1, MathExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(expEClass, Exp.class, "Exp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getExp_Name(), ecorePackage.getEString(), "name", null, 0, 1, Exp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getExp_Exp(), this.getExpression(), null, "exp", null, 0, 1, Exp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(varBindingEClass, VarBinding.class, "VarBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getVarBinding_Name(), ecorePackage.getEString(), "name", null, 0, 1, VarBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getVarBinding_Exp(), this.getExpression(), null, "exp", null, 0, 1, VarBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(experssionEClass, Experssion.class, "Experssion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(addEClass, Add.class, "Add", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAdd_Left(), this.getExpression(), null, "left", null, 0, 1, Add.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -623,10 +647,10 @@ public class MathPackageImpl extends EPackageImpl implements MathPackage
     initEClass(variableUseEClass, VariableUse.class, "VariableUse", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getVariableUse_Ref(), ecorePackage.getEString(), "ref", null, 0, 1, VariableUse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(variableBindingEClass, VariableBinding.class, "VariableBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getVariableBinding_Id(), ecorePackage.getEString(), "id", null, 0, 1, VariableBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getVariableBinding_Binding(), this.getExpression(), null, "binding", null, 0, 1, VariableBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getVariableBinding_Body(), this.getExpression(), null, "body", null, 0, 1, VariableBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(letBindingEClass, LetBinding.class, "LetBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLetBinding_Name(), ecorePackage.getEString(), "name", null, 0, 1, LetBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getLetBinding_Binding(), this.getExpression(), null, "binding", null, 0, 1, LetBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getLetBinding_Body(), this.getExpression(), null, "body", null, 0, 1, LetBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

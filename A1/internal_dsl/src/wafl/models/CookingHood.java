@@ -31,10 +31,6 @@ public class CookingHood implements Model {
                     .then(() -> power = 1)
 
                 .given(ON)
-                    .when(MINUS)
-                    .and(() -> power == 1)
-                    .then(OFF)
-
                     .when(PLUS)
                     .and(() -> power == 6)
                     .then(MAX)

@@ -11,6 +11,8 @@ import dk.sdu.mmmi.mdsd.math.Sub
 import dk.sdu.mmmi.mdsd.math.Mul
 import dk.sdu.mmmi.mdsd.math.Parenthesis
 import dk.sdu.mmmi.mdsd.math.Add
+import dk.sdu.mmmi.mdsd.math.VariableUse
+import dk.sdu.mmmi.mdsd.math.LetBinding
 import java.util.HashMap
 import java.util.Map
 import javax.swing.JOptionPane
@@ -18,8 +20,6 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
-import dk.sdu.mmmi.mdsd.math.VariableBinding
-import dk.sdu.mmmi.mdsd.math.VariableUse
 
 /**
  * Generates code from your model files on save.
@@ -65,13 +65,14 @@ class MathGenerator extends AbstractGenerator {
 			Parenthesis: exp.exp.computeExp(vars, fwExp)
 			VariableUse:
 			{
+				//exp.ref.computeBinding
 				if (!vars.keySet.contains(exp.ref)) {
 					val res = fwExp.get(exp.ref).computeExp(vars, fwExp)
 					vars.put(exp.ref, res)
 				}
 				vars.get(exp.ref)
 			}
-			VariableBinding: exp.body.computeExp(vars.bind(exp.id, exp.binding.computeExp(vars, fwExp)), fwExp)
+			LetBinding: exp.body.computeExp(vars.bind(exp.name, exp.binding.computeExp(vars, fwExp)), fwExp)
 			default: throw new Error("Could not compute expression")
 		}
 	}

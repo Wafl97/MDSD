@@ -5,9 +5,8 @@ package dk.sdu.mmmi.mdsd.validation
 
 import org.eclipse.xtext.validation.Check
 import dk.sdu.mmmi.mdsd.math.MathExp
-import java.util.HashSet
 import dk.sdu.mmmi.mdsd.math.MathPackage
-import dk.sdu.mmmi.mdsd.math.Exp
+import dk.sdu.mmmi.mdsd.math.VarBinding
 
 /**
  * This class contains custom validation rules. 
@@ -26,25 +25,12 @@ class MathValidator extends AbstractMathValidator {
 //					INVALID_NAME)
 //		}
 //	}
-	public static val DUBLICATE_VAR = 'dublicateVar'
-	
-	val set = new HashSet<String>()
+	public static final String VAR_UNIQUE = 'var_unique'
 	
 	@Check
-	def clearSet(MathExp m) {
-		set.clear
-	}
-	
-	@Check
-	def checkNoDublicateVar(Exp exp) {
-		if (set.contains(exp.name)) {
-			warning("var " + exp.name + " has already been declared",
-				MathPackage.Literals.EXP__NAME,
-				DUBLICATE_VAR
-			)
-			return
-		}
-		set.add(exp.name)
+	def void uniqueGlobalVariableDefinition(VarBinding binding){
+		if((binding.eContainer as MathExp).exps.filter[name == binding.name].size > 1)
+			error("Duplicate global variable", MathPackage.eINSTANCE.varBinding_Name, VAR_UNIQUE)
 	}
 	
 }

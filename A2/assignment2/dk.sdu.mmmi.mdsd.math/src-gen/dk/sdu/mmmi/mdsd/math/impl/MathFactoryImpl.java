@@ -66,8 +66,9 @@ public class MathFactoryImpl extends EFactoryImpl implements MathFactory
     switch (eClass.getClassifierID())
     {
       case MathPackage.MATH_EXP: return createMathExp();
-      case MathPackage.EXP: return createExp();
+      case MathPackage.VAR_BINDING: return createVarBinding();
       case MathPackage.EXPRESSION: return createExpression();
+      case MathPackage.EXPERSSION: return createExperssion();
       case MathPackage.ADD: return createAdd();
       case MathPackage.SUB: return createSub();
       case MathPackage.MUL: return createMul();
@@ -75,7 +76,7 @@ public class MathFactoryImpl extends EFactoryImpl implements MathFactory
       case MathPackage.PARENTHESIS: return createParenthesis();
       case MathPackage.CONSTANT: return createConstant();
       case MathPackage.VARIABLE_USE: return createVariableUse();
-      case MathPackage.VARIABLE_BINDING: return createVariableBinding();
+      case MathPackage.LET_BINDING: return createLetBinding();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -99,10 +100,10 @@ public class MathFactoryImpl extends EFactoryImpl implements MathFactory
    * @generated
    */
   @Override
-  public Exp createExp()
+  public VarBinding createVarBinding()
   {
-    ExpImpl exp = new ExpImpl();
-    return exp;
+    VarBindingImpl varBinding = new VarBindingImpl();
+    return varBinding;
   }
 
   /**
@@ -115,6 +116,18 @@ public class MathFactoryImpl extends EFactoryImpl implements MathFactory
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Experssion createExperssion()
+  {
+    ExperssionImpl experssion = new ExperssionImpl();
+    return experssion;
   }
 
   /**
@@ -207,10 +220,10 @@ public class MathFactoryImpl extends EFactoryImpl implements MathFactory
    * @generated
    */
   @Override
-  public VariableBinding createVariableBinding()
+  public LetBinding createLetBinding()
   {
-    VariableBindingImpl variableBinding = new VariableBindingImpl();
-    return variableBinding;
+    LetBindingImpl letBinding = new LetBindingImpl();
+    return letBinding;
   }
 
   /**

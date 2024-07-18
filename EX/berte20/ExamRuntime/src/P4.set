@@ -1,0 +1,15 @@
+// Test program introducing tuples, functions, and inheritance
+
+program P4RecordInheritance
+
+record r1(a: Set(Int)) {
+	b: {1,2,3} // Set constant
+	union: a U b // Union of two sets
+	intersection: a & b // Union of two sets
+}
+
+record r2: r1 {
+	x: {2,4,6} * intersection
+}
+
+compute !r2({1,2,4})->x

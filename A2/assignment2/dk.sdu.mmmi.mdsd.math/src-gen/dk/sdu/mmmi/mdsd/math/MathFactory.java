@@ -33,13 +33,13 @@ public interface MathFactory extends EFactory
   MathExp createMathExp();
 
   /**
-   * Returns a new object of class '<em>Exp</em>'.
+   * Returns a new object of class '<em>Var Binding</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Exp</em>'.
+   * @return a new object of class '<em>Var Binding</em>'.
    * @generated
    */
-  Exp createExp();
+  VarBinding createVarBinding();
 
   /**
    * Returns a new object of class '<em>Expression</em>'.
@@ -49,6 +49,15 @@ public interface MathFactory extends EFactory
    * @generated
    */
   Expression createExpression();
+
+  /**
+   * Returns a new object of class '<em>Experssion</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Experssion</em>'.
+   * @generated
+   */
+  Experssion createExperssion();
 
   /**
    * Returns a new object of class '<em>Add</em>'.
@@ -114,13 +123,13 @@ public interface MathFactory extends EFactory
   VariableUse createVariableUse();
 
   /**
-   * Returns a new object of class '<em>Variable Binding</em>'.
+   * Returns a new object of class '<em>Let Binding</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Variable Binding</em>'.
+   * @return a new object of class '<em>Let Binding</em>'.
    * @generated
    */
-  VariableBinding createVariableBinding();
+  LetBinding createLetBinding();
 
   /**
    * Returns the package supported by this factory.

@@ -1,0 +1,96 @@
+grammar dk.sdu.mmmi.mdsd.ex.SetLang with org.eclipse.xtext.common.Terminals
+
+generate setLang "http://www.sdu.dk/mmmi/mdsd/ex/SetLang"
+
+Program:
+	'program' name=ID
+	externalDefs+=ExternalDef*
+	records+=Record*
+	computes+=Compute*
+;
+
+ExternalDef:
+	'external' name=ID '(' type=Type ')'
+;
+
+Record:
+	'record' name=ID (':' parent=[Record])? 
+	('(' parameters+=Parameter (',' parameters+=Parameter)*')')?
+	'{' members+=Member* '}'
+;
+
+Parameter:
+	name=ID ':' type=Type
+;
+
+Type:
+	'Int' | 
+	'Tuple' | 
+	'Set' '(' Type ')'
+;
+
+Member:
+	name=ID ':' exp=UnionIntersection
+;
+
+Compute:
+	'compute' exp=UnionIntersection
+;
+
+UnionIntersection returns Expression:
+	Product ((
+		{Union.left=current} 'U' |
+		{Intersection.left=current} '&'
+	) right=Product)*
+;
+
+Product returns Expression:
+	ProjectionFilter (({Product.left=current} '*') right=ProjectionFilter)*
+;
+
+ProjectionFilter returns Expression:
+	Primitive ('#' 
+		(({Projection.op=current} '<' indices+=INT (',' indices+=INT)* '>')  | 
+		({Filter.op=current}'[' external=[ExternalDef] ']'))
+		)?
+;
+
+Binding:
+	Member | Parameter
+;
+
+Primitive returns Expression:
+	IntValue |
+	 Set | 
+	 Tuple | 
+	 RecordAccess | 
+	 Ref | 
+	 Parenthesis
+;
+
+Ref:
+	ref=[Binding]
+;
+
+IntValue returns Expression:
+	{IntValue} value=INT
+;
+
+Set returns Expression:
+	{Set} '{' (values+=UnionIntersection (',' values+=UnionIntersection)*)?  '}'
+;
+
+Tuple returns Expression:
+	{Tuple} '[' values+=UnionIntersection (',' values+=UnionIntersection*)* ']'
+;
+
+Parenthesis returns Expression:
+	{Parenthesis} '(' exp=UnionIntersection ')'
+;
+
+
+
+RecordAccess returns Expression:
+	{RecordAccess} '!' record=[Record] ('(' parameters+=UnionIntersection (',' parameters+=UnionIntersection)* ')')? '->' member=[Member]
+;
+

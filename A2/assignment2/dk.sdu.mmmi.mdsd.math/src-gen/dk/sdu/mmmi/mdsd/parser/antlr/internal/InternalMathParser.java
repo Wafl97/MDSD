@@ -119,7 +119,7 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMathExp"
-    // InternalMath.g:71:1: ruleMathExp returns [EObject current=null] : ( (lv_exps_0_0= ruleExp ) )* ;
+    // InternalMath.g:71:1: ruleMathExp returns [EObject current=null] : ( (lv_exps_0_0= ruleVarBinding ) )* ;
     public final EObject ruleMathExp() throws RecognitionException {
         EObject current = null;
 
@@ -130,10 +130,10 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalMath.g:77:2: ( ( (lv_exps_0_0= ruleExp ) )* )
-            // InternalMath.g:78:2: ( (lv_exps_0_0= ruleExp ) )*
+            // InternalMath.g:77:2: ( ( (lv_exps_0_0= ruleVarBinding ) )* )
+            // InternalMath.g:78:2: ( (lv_exps_0_0= ruleVarBinding ) )*
             {
-            // InternalMath.g:78:2: ( (lv_exps_0_0= ruleExp ) )*
+            // InternalMath.g:78:2: ( (lv_exps_0_0= ruleVarBinding ) )*
             loop1:
             do {
                 int alt1=2;
@@ -146,16 +146,16 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalMath.g:79:3: (lv_exps_0_0= ruleExp )
+            	    // InternalMath.g:79:3: (lv_exps_0_0= ruleVarBinding )
             	    {
-            	    // InternalMath.g:79:3: (lv_exps_0_0= ruleExp )
-            	    // InternalMath.g:80:4: lv_exps_0_0= ruleExp
+            	    // InternalMath.g:79:3: (lv_exps_0_0= ruleVarBinding )
+            	    // InternalMath.g:80:4: lv_exps_0_0= ruleVarBinding
             	    {
 
-            	    				newCompositeNode(grammarAccess.getMathExpAccess().getExpsExpParserRuleCall_0());
+            	    				newCompositeNode(grammarAccess.getMathExpAccess().getExpsVarBindingParserRuleCall_0());
             	    			
             	    pushFollow(FOLLOW_3);
-            	    lv_exps_0_0=ruleExp();
+            	    lv_exps_0_0=ruleVarBinding();
 
             	    state._fsp--;
 
@@ -167,7 +167,7 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
             	    					current,
             	    					"exps",
             	    					lv_exps_0_0,
-            	    					"dk.sdu.mmmi.mdsd.Math.Exp");
+            	    					"dk.sdu.mmmi.mdsd.Math.VarBinding");
             	    				afterParserOrEnumRuleCall();
             	    			
 
@@ -201,25 +201,25 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleMathExp"
 
 
-    // $ANTLR start "entryRuleExp"
-    // InternalMath.g:100:1: entryRuleExp returns [EObject current=null] : iv_ruleExp= ruleExp EOF ;
-    public final EObject entryRuleExp() throws RecognitionException {
+    // $ANTLR start "entryRuleVarBinding"
+    // InternalMath.g:100:1: entryRuleVarBinding returns [EObject current=null] : iv_ruleVarBinding= ruleVarBinding EOF ;
+    public final EObject entryRuleVarBinding() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleExp = null;
+        EObject iv_ruleVarBinding = null;
 
 
         try {
-            // InternalMath.g:100:44: (iv_ruleExp= ruleExp EOF )
-            // InternalMath.g:101:2: iv_ruleExp= ruleExp EOF
+            // InternalMath.g:100:51: (iv_ruleVarBinding= ruleVarBinding EOF )
+            // InternalMath.g:101:2: iv_ruleVarBinding= ruleVarBinding EOF
             {
-             newCompositeNode(grammarAccess.getExpRule()); 
+             newCompositeNode(grammarAccess.getVarBindingRule()); 
             pushFollow(FOLLOW_1);
-            iv_ruleExp=ruleExp();
+            iv_ruleVarBinding=ruleVarBinding();
 
             state._fsp--;
 
-             current =iv_ruleExp; 
+             current =iv_ruleVarBinding; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -234,12 +234,12 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleExp"
+    // $ANTLR end "entryRuleVarBinding"
 
 
-    // $ANTLR start "ruleExp"
-    // InternalMath.g:107:1: ruleExp returns [EObject current=null] : (otherlv_0= 'var' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '=' ( (lv_exp_3_0= ruleSumDiff ) ) ) ;
-    public final EObject ruleExp() throws RecognitionException {
+    // $ANTLR start "ruleVarBinding"
+    // InternalMath.g:107:1: ruleVarBinding returns [EObject current=null] : (otherlv_0= 'var' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '=' ( (lv_exp_3_0= ruleSumDiff ) ) ) ;
+    public final EObject ruleVarBinding() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
@@ -260,7 +260,7 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
             {
             otherlv_0=(Token)match(input,11,FOLLOW_4); 
 
-            			newLeafNode(otherlv_0, grammarAccess.getExpAccess().getVarKeyword_0());
+            			newLeafNode(otherlv_0, grammarAccess.getVarBindingAccess().getVarKeyword_0());
             		
             // InternalMath.g:119:3: ( (lv_name_1_0= RULE_ID ) )
             // InternalMath.g:120:4: (lv_name_1_0= RULE_ID )
@@ -270,11 +270,11 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_5); 
 
-            					newLeafNode(lv_name_1_0, grammarAccess.getExpAccess().getNameIDTerminalRuleCall_1_0());
+            					newLeafNode(lv_name_1_0, grammarAccess.getVarBindingAccess().getNameIDTerminalRuleCall_1_0());
             				
 
             					if (current==null) {
-            						current = createModelElement(grammarAccess.getExpRule());
+            						current = createModelElement(grammarAccess.getVarBindingRule());
             					}
             					setWithLastConsumed(
             						current,
@@ -290,7 +290,7 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
 
             otherlv_2=(Token)match(input,12,FOLLOW_6); 
 
-            			newLeafNode(otherlv_2, grammarAccess.getExpAccess().getEqualsSignKeyword_2());
+            			newLeafNode(otherlv_2, grammarAccess.getVarBindingAccess().getEqualsSignKeyword_2());
             		
             // InternalMath.g:141:3: ( (lv_exp_3_0= ruleSumDiff ) )
             // InternalMath.g:142:4: (lv_exp_3_0= ruleSumDiff )
@@ -299,7 +299,7 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
             // InternalMath.g:143:5: lv_exp_3_0= ruleSumDiff
             {
 
-            					newCompositeNode(grammarAccess.getExpAccess().getExpSumDiffParserRuleCall_3_0());
+            					newCompositeNode(grammarAccess.getVarBindingAccess().getExpSumDiffParserRuleCall_3_0());
             				
             pushFollow(FOLLOW_2);
             lv_exp_3_0=ruleSumDiff();
@@ -308,7 +308,7 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
 
 
             					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getExpRule());
+            						current = createModelElementForParent(grammarAccess.getVarBindingRule());
             					}
             					set(
             						current,
@@ -342,7 +342,7 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleExp"
+    // $ANTLR end "ruleVarBinding"
 
 
     // $ANTLR start "entryRuleSumDiff"
@@ -824,7 +824,7 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePrimary"
-    // InternalMath.g:325:1: rulePrimary returns [EObject current=null] : (this_Constant_0= ruleConstant | this_Parenthesis_1= ruleParenthesis | this_VariableUse_2= ruleVariableUse | this_VariableBinding_3= ruleVariableBinding ) ;
+    // InternalMath.g:325:1: rulePrimary returns [EObject current=null] : (this_Constant_0= ruleConstant | this_Parenthesis_1= ruleParenthesis | this_VariableUse_2= ruleVariableUse | this_LetBinding_3= ruleLetBinding ) ;
     public final EObject rulePrimary() throws RecognitionException {
         EObject current = null;
 
@@ -834,17 +834,17 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
 
         EObject this_VariableUse_2 = null;
 
-        EObject this_VariableBinding_3 = null;
+        EObject this_LetBinding_3 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalMath.g:331:2: ( (this_Constant_0= ruleConstant | this_Parenthesis_1= ruleParenthesis | this_VariableUse_2= ruleVariableUse | this_VariableBinding_3= ruleVariableBinding ) )
-            // InternalMath.g:332:2: (this_Constant_0= ruleConstant | this_Parenthesis_1= ruleParenthesis | this_VariableUse_2= ruleVariableUse | this_VariableBinding_3= ruleVariableBinding )
+            // InternalMath.g:331:2: ( (this_Constant_0= ruleConstant | this_Parenthesis_1= ruleParenthesis | this_VariableUse_2= ruleVariableUse | this_LetBinding_3= ruleLetBinding ) )
+            // InternalMath.g:332:2: (this_Constant_0= ruleConstant | this_Parenthesis_1= ruleParenthesis | this_VariableUse_2= ruleVariableUse | this_LetBinding_3= ruleLetBinding )
             {
-            // InternalMath.g:332:2: (this_Constant_0= ruleConstant | this_Parenthesis_1= ruleParenthesis | this_VariableUse_2= ruleVariableUse | this_VariableBinding_3= ruleVariableBinding )
+            // InternalMath.g:332:2: (this_Constant_0= ruleConstant | this_Parenthesis_1= ruleParenthesis | this_VariableUse_2= ruleVariableUse | this_LetBinding_3= ruleLetBinding )
             int alt6=4;
             switch ( input.LA(1) ) {
             case RULE_INT:
@@ -930,18 +930,18 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalMath.g:360:3: this_VariableBinding_3= ruleVariableBinding
+                    // InternalMath.g:360:3: this_LetBinding_3= ruleLetBinding
                     {
 
-                    			newCompositeNode(grammarAccess.getPrimaryAccess().getVariableBindingParserRuleCall_3());
+                    			newCompositeNode(grammarAccess.getPrimaryAccess().getLetBindingParserRuleCall_3());
                     		
                     pushFollow(FOLLOW_2);
-                    this_VariableBinding_3=ruleVariableBinding();
+                    this_LetBinding_3=ruleLetBinding();
 
                     state._fsp--;
 
 
-                    			current = this_VariableBinding_3;
+                    			current = this_LetBinding_3;
                     			afterParserOrEnumRuleCall();
                     		
 
@@ -1321,25 +1321,25 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleVariableUse"
 
 
-    // $ANTLR start "entryRuleVariableBinding"
-    // InternalMath.g:513:1: entryRuleVariableBinding returns [EObject current=null] : iv_ruleVariableBinding= ruleVariableBinding EOF ;
-    public final EObject entryRuleVariableBinding() throws RecognitionException {
+    // $ANTLR start "entryRuleLetBinding"
+    // InternalMath.g:513:1: entryRuleLetBinding returns [EObject current=null] : iv_ruleLetBinding= ruleLetBinding EOF ;
+    public final EObject entryRuleLetBinding() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleVariableBinding = null;
+        EObject iv_ruleLetBinding = null;
 
 
         try {
-            // InternalMath.g:513:56: (iv_ruleVariableBinding= ruleVariableBinding EOF )
-            // InternalMath.g:514:2: iv_ruleVariableBinding= ruleVariableBinding EOF
+            // InternalMath.g:513:51: (iv_ruleLetBinding= ruleLetBinding EOF )
+            // InternalMath.g:514:2: iv_ruleLetBinding= ruleLetBinding EOF
             {
-             newCompositeNode(grammarAccess.getVariableBindingRule()); 
+             newCompositeNode(grammarAccess.getLetBindingRule()); 
             pushFollow(FOLLOW_1);
-            iv_ruleVariableBinding=ruleVariableBinding();
+            iv_ruleLetBinding=ruleLetBinding();
 
             state._fsp--;
 
-             current =iv_ruleVariableBinding; 
+             current =iv_ruleLetBinding; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -1354,16 +1354,16 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleVariableBinding"
+    // $ANTLR end "entryRuleLetBinding"
 
 
-    // $ANTLR start "ruleVariableBinding"
-    // InternalMath.g:520:1: ruleVariableBinding returns [EObject current=null] : ( () otherlv_1= 'let' ( (lv_id_2_0= RULE_ID ) ) otherlv_3= '=' ( (lv_binding_4_0= ruleSumDiff ) ) otherlv_5= 'in' ( (lv_body_6_0= ruleSumDiff ) ) otherlv_7= 'end' ) ;
-    public final EObject ruleVariableBinding() throws RecognitionException {
+    // $ANTLR start "ruleLetBinding"
+    // InternalMath.g:520:1: ruleLetBinding returns [EObject current=null] : ( () otherlv_1= 'let' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '=' ( (lv_binding_4_0= ruleSumDiff ) ) otherlv_5= 'in' ( (lv_body_6_0= ruleSumDiff ) ) otherlv_7= 'end' ) ;
+    public final EObject ruleLetBinding() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
-        Token lv_id_2_0=null;
+        Token lv_name_2_0=null;
         Token otherlv_3=null;
         Token otherlv_5=null;
         Token otherlv_7=null;
@@ -1376,18 +1376,18 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalMath.g:526:2: ( ( () otherlv_1= 'let' ( (lv_id_2_0= RULE_ID ) ) otherlv_3= '=' ( (lv_binding_4_0= ruleSumDiff ) ) otherlv_5= 'in' ( (lv_body_6_0= ruleSumDiff ) ) otherlv_7= 'end' ) )
-            // InternalMath.g:527:2: ( () otherlv_1= 'let' ( (lv_id_2_0= RULE_ID ) ) otherlv_3= '=' ( (lv_binding_4_0= ruleSumDiff ) ) otherlv_5= 'in' ( (lv_body_6_0= ruleSumDiff ) ) otherlv_7= 'end' )
+            // InternalMath.g:526:2: ( ( () otherlv_1= 'let' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '=' ( (lv_binding_4_0= ruleSumDiff ) ) otherlv_5= 'in' ( (lv_body_6_0= ruleSumDiff ) ) otherlv_7= 'end' ) )
+            // InternalMath.g:527:2: ( () otherlv_1= 'let' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '=' ( (lv_binding_4_0= ruleSumDiff ) ) otherlv_5= 'in' ( (lv_body_6_0= ruleSumDiff ) ) otherlv_7= 'end' )
             {
-            // InternalMath.g:527:2: ( () otherlv_1= 'let' ( (lv_id_2_0= RULE_ID ) ) otherlv_3= '=' ( (lv_binding_4_0= ruleSumDiff ) ) otherlv_5= 'in' ( (lv_body_6_0= ruleSumDiff ) ) otherlv_7= 'end' )
-            // InternalMath.g:528:3: () otherlv_1= 'let' ( (lv_id_2_0= RULE_ID ) ) otherlv_3= '=' ( (lv_binding_4_0= ruleSumDiff ) ) otherlv_5= 'in' ( (lv_body_6_0= ruleSumDiff ) ) otherlv_7= 'end'
+            // InternalMath.g:527:2: ( () otherlv_1= 'let' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '=' ( (lv_binding_4_0= ruleSumDiff ) ) otherlv_5= 'in' ( (lv_body_6_0= ruleSumDiff ) ) otherlv_7= 'end' )
+            // InternalMath.g:528:3: () otherlv_1= 'let' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '=' ( (lv_binding_4_0= ruleSumDiff ) ) otherlv_5= 'in' ( (lv_body_6_0= ruleSumDiff ) ) otherlv_7= 'end'
             {
             // InternalMath.g:528:3: ()
             // InternalMath.g:529:4: 
             {
 
             				current = forceCreateModelElement(
-            					grammarAccess.getVariableBindingAccess().getVariableBindingAction_0(),
+            					grammarAccess.getLetBindingAccess().getLetBindingAction_0(),
             					current);
             			
 
@@ -1395,26 +1395,26 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
 
             otherlv_1=(Token)match(input,19,FOLLOW_4); 
 
-            			newLeafNode(otherlv_1, grammarAccess.getVariableBindingAccess().getLetKeyword_1());
+            			newLeafNode(otherlv_1, grammarAccess.getLetBindingAccess().getLetKeyword_1());
             		
-            // InternalMath.g:539:3: ( (lv_id_2_0= RULE_ID ) )
-            // InternalMath.g:540:4: (lv_id_2_0= RULE_ID )
+            // InternalMath.g:539:3: ( (lv_name_2_0= RULE_ID ) )
+            // InternalMath.g:540:4: (lv_name_2_0= RULE_ID )
             {
-            // InternalMath.g:540:4: (lv_id_2_0= RULE_ID )
-            // InternalMath.g:541:5: lv_id_2_0= RULE_ID
+            // InternalMath.g:540:4: (lv_name_2_0= RULE_ID )
+            // InternalMath.g:541:5: lv_name_2_0= RULE_ID
             {
-            lv_id_2_0=(Token)match(input,RULE_ID,FOLLOW_5); 
+            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_5); 
 
-            					newLeafNode(lv_id_2_0, grammarAccess.getVariableBindingAccess().getIdIDTerminalRuleCall_2_0());
+            					newLeafNode(lv_name_2_0, grammarAccess.getLetBindingAccess().getNameIDTerminalRuleCall_2_0());
             				
 
             					if (current==null) {
-            						current = createModelElement(grammarAccess.getVariableBindingRule());
+            						current = createModelElement(grammarAccess.getLetBindingRule());
             					}
             					setWithLastConsumed(
             						current,
-            						"id",
-            						lv_id_2_0,
+            						"name",
+            						lv_name_2_0,
             						"org.eclipse.xtext.common.Terminals.ID");
             				
 
@@ -1425,7 +1425,7 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
 
             otherlv_3=(Token)match(input,12,FOLLOW_6); 
 
-            			newLeafNode(otherlv_3, grammarAccess.getVariableBindingAccess().getEqualsSignKeyword_3());
+            			newLeafNode(otherlv_3, grammarAccess.getLetBindingAccess().getEqualsSignKeyword_3());
             		
             // InternalMath.g:561:3: ( (lv_binding_4_0= ruleSumDiff ) )
             // InternalMath.g:562:4: (lv_binding_4_0= ruleSumDiff )
@@ -1434,7 +1434,7 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
             // InternalMath.g:563:5: lv_binding_4_0= ruleSumDiff
             {
 
-            					newCompositeNode(grammarAccess.getVariableBindingAccess().getBindingSumDiffParserRuleCall_4_0());
+            					newCompositeNode(grammarAccess.getLetBindingAccess().getBindingSumDiffParserRuleCall_4_0());
             				
             pushFollow(FOLLOW_10);
             lv_binding_4_0=ruleSumDiff();
@@ -1443,7 +1443,7 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
 
 
             					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getVariableBindingRule());
+            						current = createModelElementForParent(grammarAccess.getLetBindingRule());
             					}
             					set(
             						current,
@@ -1460,7 +1460,7 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
 
             otherlv_5=(Token)match(input,20,FOLLOW_6); 
 
-            			newLeafNode(otherlv_5, grammarAccess.getVariableBindingAccess().getInKeyword_5());
+            			newLeafNode(otherlv_5, grammarAccess.getLetBindingAccess().getInKeyword_5());
             		
             // InternalMath.g:584:3: ( (lv_body_6_0= ruleSumDiff ) )
             // InternalMath.g:585:4: (lv_body_6_0= ruleSumDiff )
@@ -1469,7 +1469,7 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
             // InternalMath.g:586:5: lv_body_6_0= ruleSumDiff
             {
 
-            					newCompositeNode(grammarAccess.getVariableBindingAccess().getBodySumDiffParserRuleCall_6_0());
+            					newCompositeNode(grammarAccess.getLetBindingAccess().getBodySumDiffParserRuleCall_6_0());
             				
             pushFollow(FOLLOW_11);
             lv_body_6_0=ruleSumDiff();
@@ -1478,7 +1478,7 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
 
 
             					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getVariableBindingRule());
+            						current = createModelElementForParent(grammarAccess.getLetBindingRule());
             					}
             					set(
             						current,
@@ -1495,7 +1495,7 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
 
             otherlv_7=(Token)match(input,21,FOLLOW_2); 
 
-            			newLeafNode(otherlv_7, grammarAccess.getVariableBindingAccess().getEndKeyword_7());
+            			newLeafNode(otherlv_7, grammarAccess.getLetBindingAccess().getEndKeyword_7());
             		
 
             }
@@ -1516,7 +1516,7 @@ public class InternalMathParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleVariableBinding"
+    // $ANTLR end "ruleLetBinding"
 
     // Delegated rules
 

@@ -26,21 +26,21 @@ public class MathGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	public class MathExpElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.mmmi.mdsd.Math.MathExp");
 		private final Assignment cExpsAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cExpsExpParserRuleCall_0 = (RuleCall)cExpsAssignment.eContents().get(0);
+		private final RuleCall cExpsVarBindingParserRuleCall_0 = (RuleCall)cExpsAssignment.eContents().get(0);
 		
 		//MathExp:
-		//    exps+=Exp*
+		//    exps+=VarBinding*
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//exps+=Exp*
+		//exps+=VarBinding*
 		public Assignment getExpsAssignment() { return cExpsAssignment; }
 		
-		//Exp
-		public RuleCall getExpsExpParserRuleCall_0() { return cExpsExpParserRuleCall_0; }
+		//VarBinding
+		public RuleCall getExpsVarBindingParserRuleCall_0() { return cExpsVarBindingParserRuleCall_0; }
 	}
-	public class ExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.mmmi.mdsd.Math.Exp");
+	public class VarBindingElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.mmmi.mdsd.Math.VarBinding");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cVarKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -49,7 +49,7 @@ public class MathGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Assignment cExpAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cExpSumDiffParserRuleCall_3_0 = (RuleCall)cExpAssignment_3.eContents().get(0);
 		
-		//Exp:
+		//VarBinding:
 		//    'var' name=ID '=' exp=SumDiff
 		//;
 		@Override public ParserRule getRule() { return rule; }
@@ -193,14 +193,14 @@ public class MathGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final RuleCall cConstantParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cParenthesisParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cVariableUseParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cVariableBindingParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cLetBindingParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//Primary returns Expression:
-		//    Constant | Parenthesis | VariableUse | VariableBinding
+		//    Constant | Parenthesis | VariableUse | LetBinding
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Constant | Parenthesis | VariableUse | VariableBinding
+		//Constant | Parenthesis | VariableUse | LetBinding
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Constant
@@ -212,8 +212,8 @@ public class MathGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//VariableUse
 		public RuleCall getVariableUseParserRuleCall_2() { return cVariableUseParserRuleCall_2; }
 		
-		//VariableBinding
-		public RuleCall getVariableBindingParserRuleCall_3() { return cVariableBindingParserRuleCall_3; }
+		//LetBinding
+		public RuleCall getLetBindingParserRuleCall_3() { return cLetBindingParserRuleCall_3; }
 	}
 	public class ParenthesisElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.mmmi.mdsd.Math.Parenthesis");
@@ -295,13 +295,13 @@ public class MathGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//ID
 		public RuleCall getRefIDTerminalRuleCall_1_0() { return cRefIDTerminalRuleCall_1_0; }
 	}
-	public class VariableBindingElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.mmmi.mdsd.Math.VariableBinding");
+	public class LetBindingElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.mmmi.mdsd.Math.LetBinding");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cVariableBindingAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cLetBindingAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cLetKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cIdAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cIdIDTerminalRuleCall_2_0 = (RuleCall)cIdAssignment_2.eContents().get(0);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cBindingAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cBindingSumDiffParserRuleCall_4_0 = (RuleCall)cBindingAssignment_4.eContents().get(0);
@@ -310,25 +310,25 @@ public class MathGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final RuleCall cBodySumDiffParserRuleCall_6_0 = (RuleCall)cBodyAssignment_6.eContents().get(0);
 		private final Keyword cEndKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
-		//VariableBinding returns Expression:
-		//    {VariableBinding} 'let' id=ID '=' binding=SumDiff 'in' body=SumDiff 'end'
+		//LetBinding returns Experssion:
+		//    {LetBinding} 'let' name=ID '=' binding=SumDiff 'in' body=SumDiff 'end'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{VariableBinding} 'let' id=ID '=' binding=SumDiff 'in' body=SumDiff 'end'
+		//{LetBinding} 'let' name=ID '=' binding=SumDiff 'in' body=SumDiff 'end'
 		public Group getGroup() { return cGroup; }
 		
-		//{VariableBinding}
-		public Action getVariableBindingAction_0() { return cVariableBindingAction_0; }
+		//{LetBinding}
+		public Action getLetBindingAction_0() { return cLetBindingAction_0; }
 		
 		//'let'
 		public Keyword getLetKeyword_1() { return cLetKeyword_1; }
 		
-		//id=ID
-		public Assignment getIdAssignment_2() { return cIdAssignment_2; }
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
 		//ID
-		public RuleCall getIdIDTerminalRuleCall_2_0() { return cIdIDTerminalRuleCall_2_0; }
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 		
 		//'='
 		public Keyword getEqualsSignKeyword_3() { return cEqualsSignKeyword_3; }
@@ -354,14 +354,14 @@ public class MathGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	
 	
 	private final MathExpElements pMathExp;
-	private final ExpElements pExp;
+	private final VarBindingElements pVarBinding;
 	private final SumDiffElements pSumDiff;
 	private final ProdQuotElements pProdQuot;
 	private final PrimaryElements pPrimary;
 	private final ParenthesisElements pParenthesis;
 	private final ConstantElements pConstant;
 	private final VariableUseElements pVariableUse;
-	private final VariableBindingElements pVariableBinding;
+	private final LetBindingElements pLetBinding;
 	
 	private final Grammar grammar;
 	
@@ -373,14 +373,14 @@ public class MathGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pMathExp = new MathExpElements();
-		this.pExp = new ExpElements();
+		this.pVarBinding = new VarBindingElements();
 		this.pSumDiff = new SumDiffElements();
 		this.pProdQuot = new ProdQuotElements();
 		this.pPrimary = new PrimaryElements();
 		this.pParenthesis = new ParenthesisElements();
 		this.pConstant = new ConstantElements();
 		this.pVariableUse = new VariableUseElements();
-		this.pVariableBinding = new VariableBindingElements();
+		this.pLetBinding = new LetBindingElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -411,7 +411,7 @@ public class MathGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 
 	
 	//MathExp:
-	//    exps+=Exp*
+	//    exps+=VarBinding*
 	//;
 	public MathExpElements getMathExpAccess() {
 		return pMathExp;
@@ -421,15 +421,15 @@ public class MathGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		return getMathExpAccess().getRule();
 	}
 	
-	//Exp:
+	//VarBinding:
 	//    'var' name=ID '=' exp=SumDiff
 	//;
-	public ExpElements getExpAccess() {
-		return pExp;
+	public VarBindingElements getVarBindingAccess() {
+		return pVarBinding;
 	}
 	
-	public ParserRule getExpRule() {
-		return getExpAccess().getRule();
+	public ParserRule getVarBindingRule() {
+		return getVarBindingAccess().getRule();
 	}
 	
 	//SumDiff returns Expression:
@@ -455,7 +455,7 @@ public class MathGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//Primary returns Expression:
-	//    Constant | Parenthesis | VariableUse | VariableBinding
+	//    Constant | Parenthesis | VariableUse | LetBinding
 	//;
 	public PrimaryElements getPrimaryAccess() {
 		return pPrimary;
@@ -498,15 +498,15 @@ public class MathGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		return getVariableUseAccess().getRule();
 	}
 	
-	//VariableBinding returns Expression:
-	//    {VariableBinding} 'let' id=ID '=' binding=SumDiff 'in' body=SumDiff 'end'
+	//LetBinding returns Experssion:
+	//    {LetBinding} 'let' name=ID '=' binding=SumDiff 'in' body=SumDiff 'end'
 	//;
-	public VariableBindingElements getVariableBindingAccess() {
-		return pVariableBinding;
+	public LetBindingElements getLetBindingAccess() {
+		return pLetBinding;
 	}
 	
-	public ParserRule getVariableBindingRule() {
-		return getVariableBindingAccess().getRule();
+	public ParserRule getLetBindingRule() {
+		return getLetBindingAccess().getRule();
 	}
 	
 	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;

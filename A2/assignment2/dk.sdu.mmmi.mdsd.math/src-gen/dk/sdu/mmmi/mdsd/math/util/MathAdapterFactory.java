@@ -81,14 +81,19 @@ public class MathAdapterFactory extends AdapterFactoryImpl
         return createMathExpAdapter();
       }
       @Override
-      public Adapter caseExp(Exp object)
+      public Adapter caseVarBinding(VarBinding object)
       {
-        return createExpAdapter();
+        return createVarBindingAdapter();
       }
       @Override
       public Adapter caseExpression(Expression object)
       {
         return createExpressionAdapter();
+      }
+      @Override
+      public Adapter caseExperssion(Experssion object)
+      {
+        return createExperssionAdapter();
       }
       @Override
       public Adapter caseAdd(Add object)
@@ -126,9 +131,9 @@ public class MathAdapterFactory extends AdapterFactoryImpl
         return createVariableUseAdapter();
       }
       @Override
-      public Adapter caseVariableBinding(VariableBinding object)
+      public Adapter caseLetBinding(LetBinding object)
       {
-        return createVariableBindingAdapter();
+        return createLetBindingAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -168,16 +173,16 @@ public class MathAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link dk.sdu.mmmi.mdsd.math.Exp <em>Exp</em>}'.
+   * Creates a new adapter for an object of class '{@link dk.sdu.mmmi.mdsd.math.VarBinding <em>Var Binding</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see dk.sdu.mmmi.mdsd.math.Exp
+   * @see dk.sdu.mmmi.mdsd.math.VarBinding
    * @generated
    */
-  public Adapter createExpAdapter()
+  public Adapter createVarBindingAdapter()
   {
     return null;
   }
@@ -193,6 +198,21 @@ public class MathAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link dk.sdu.mmmi.mdsd.math.Experssion <em>Experssion</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see dk.sdu.mmmi.mdsd.math.Experssion
+   * @generated
+   */
+  public Adapter createExperssionAdapter()
   {
     return null;
   }
@@ -303,16 +323,16 @@ public class MathAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link dk.sdu.mmmi.mdsd.math.VariableBinding <em>Variable Binding</em>}'.
+   * Creates a new adapter for an object of class '{@link dk.sdu.mmmi.mdsd.math.LetBinding <em>Let Binding</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see dk.sdu.mmmi.mdsd.math.VariableBinding
+   * @see dk.sdu.mmmi.mdsd.math.LetBinding
    * @generated
    */
-  public Adapter createVariableBindingAdapter()
+  public Adapter createLetBindingAdapter()
   {
     return null;
   }

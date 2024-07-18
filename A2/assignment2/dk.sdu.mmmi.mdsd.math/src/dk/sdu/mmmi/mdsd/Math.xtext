@@ -3,10 +3,10 @@ grammar dk.sdu.mmmi.mdsd.Math with org.eclipse.xtext.common.Terminals
 generate math "http://www.sdu.dk/mmmi/mdsd/Math"
 
 MathExp:
-	exps+=Exp*
+	exps+=VarBinding*
 ;
 
-Exp:
+VarBinding:
 	'var' name=ID '=' exp=SumDiff
 ;
 
@@ -19,7 +19,7 @@ ProdQuot returns Expression:
 ;
 
 Primary returns Expression:
-	Constant | Parenthesis | VariableUse | VariableBinding
+	Constant | Parenthesis | VariableUse | LetBinding
 ;
 
 Parenthesis returns Expression:
@@ -30,10 +30,11 @@ Constant returns Expression:
 	{Constant} value=INT
 ;
 
+
 VariableUse returns Expression:
 	{VariableUse} ref=ID
 ;
 
-VariableBinding returns Expression:
-	{VariableBinding} 'let' id=ID '=' binding=SumDiff 'in' body=SumDiff 'end'
+LetBinding returns Experssion:
+	{LetBinding} 'let' name=ID '=' binding=SumDiff 'in' body=SumDiff 'end'
 ;

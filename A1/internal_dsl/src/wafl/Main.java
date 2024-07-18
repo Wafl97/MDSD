@@ -51,6 +51,9 @@ public class Main {
                     .then(cookingHood::run)
                     .end()
 
+                    .when("BACK")
+                    .then("MAIN MENU")
+
                 .given("DEBUG MENU")
                     .when("BACK")
                     .then("MAIN MENU")

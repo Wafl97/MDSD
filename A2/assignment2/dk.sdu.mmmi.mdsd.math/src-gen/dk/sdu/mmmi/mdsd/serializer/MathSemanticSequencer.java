@@ -7,13 +7,13 @@ import com.google.inject.Inject;
 import dk.sdu.mmmi.mdsd.math.Add;
 import dk.sdu.mmmi.mdsd.math.Constant;
 import dk.sdu.mmmi.mdsd.math.Div;
-import dk.sdu.mmmi.mdsd.math.Exp;
+import dk.sdu.mmmi.mdsd.math.LetBinding;
 import dk.sdu.mmmi.mdsd.math.MathExp;
 import dk.sdu.mmmi.mdsd.math.MathPackage;
 import dk.sdu.mmmi.mdsd.math.Mul;
 import dk.sdu.mmmi.mdsd.math.Parenthesis;
 import dk.sdu.mmmi.mdsd.math.Sub;
-import dk.sdu.mmmi.mdsd.math.VariableBinding;
+import dk.sdu.mmmi.mdsd.math.VarBinding;
 import dk.sdu.mmmi.mdsd.math.VariableUse;
 import dk.sdu.mmmi.mdsd.services.MathGrammarAccess;
 import java.util.Set;
@@ -50,8 +50,8 @@ public class MathSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case MathPackage.DIV:
 				sequence_ProdQuot(context, (Div) semanticObject); 
 				return; 
-			case MathPackage.EXP:
-				sequence_Exp(context, (Exp) semanticObject); 
+			case MathPackage.LET_BINDING:
+				sequence_LetBinding(context, (LetBinding) semanticObject); 
 				return; 
 			case MathPackage.MATH_EXP:
 				sequence_MathExp(context, (MathExp) semanticObject); 
@@ -65,8 +65,8 @@ public class MathSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case MathPackage.SUB:
 				sequence_SumDiff(context, (Sub) semanticObject); 
 				return; 
-			case MathPackage.VARIABLE_BINDING:
-				sequence_VariableBinding(context, (VariableBinding) semanticObject); 
+			case MathPackage.VAR_BINDING:
+				sequence_VarBinding(context, (VarBinding) semanticObject); 
 				return; 
 			case MathPackage.VARIABLE_USE:
 				sequence_VariableUse(context, (VariableUse) semanticObject); 
@@ -106,22 +106,32 @@ public class MathSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Exp returns Exp
+	 *     SumDiff returns LetBinding
+	 *     SumDiff.Add_1_0_0_1 returns LetBinding
+	 *     SumDiff.Sub_1_0_1_1 returns LetBinding
+	 *     ProdQuot returns LetBinding
+	 *     ProdQuot.Mul_1_0_0_1 returns LetBinding
+	 *     ProdQuot.Div_1_0_1_1 returns LetBinding
+	 *     Primary returns LetBinding
+	 *     LetBinding returns LetBinding
 	 *
 	 * Constraint:
-	 *     (name=ID exp=SumDiff)
+	 *     (name=ID binding=SumDiff body=SumDiff)
 	 * </pre>
 	 */
-	protected void sequence_Exp(ISerializationContext context, Exp semanticObject) {
+	protected void sequence_LetBinding(ISerializationContext context, LetBinding semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MathPackage.Literals.EXP__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MathPackage.Literals.EXP__NAME));
-			if (transientValues.isValueTransient(semanticObject, MathPackage.Literals.EXP__EXP) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MathPackage.Literals.EXP__EXP));
+			if (transientValues.isValueTransient(semanticObject, MathPackage.Literals.LET_BINDING__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MathPackage.Literals.LET_BINDING__NAME));
+			if (transientValues.isValueTransient(semanticObject, MathPackage.Literals.LET_BINDING__BINDING) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MathPackage.Literals.LET_BINDING__BINDING));
+			if (transientValues.isValueTransient(semanticObject, MathPackage.Literals.LET_BINDING__BODY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MathPackage.Literals.LET_BINDING__BODY));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExpAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getExpAccess().getExpSumDiffParserRuleCall_3_0(), semanticObject.getExp());
+		feeder.accept(grammarAccess.getLetBindingAccess().getNameIDTerminalRuleCall_2_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getLetBindingAccess().getBindingSumDiffParserRuleCall_4_0(), semanticObject.getBinding());
+		feeder.accept(grammarAccess.getLetBindingAccess().getBodySumDiffParserRuleCall_6_0(), semanticObject.getBody());
 		feeder.finish();
 	}
 	
@@ -132,7 +142,7 @@ public class MathSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     MathExp returns MathExp
 	 *
 	 * Constraint:
-	 *     exps+=Exp+
+	 *     exps+=VarBinding+
 	 * </pre>
 	 */
 	protected void sequence_MathExp(ISerializationContext context, MathExp semanticObject) {
@@ -276,32 +286,22 @@ public class MathSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     SumDiff returns VariableBinding
-	 *     SumDiff.Add_1_0_0_1 returns VariableBinding
-	 *     SumDiff.Sub_1_0_1_1 returns VariableBinding
-	 *     ProdQuot returns VariableBinding
-	 *     ProdQuot.Mul_1_0_0_1 returns VariableBinding
-	 *     ProdQuot.Div_1_0_1_1 returns VariableBinding
-	 *     Primary returns VariableBinding
-	 *     VariableBinding returns VariableBinding
+	 *     VarBinding returns VarBinding
 	 *
 	 * Constraint:
-	 *     (id=ID binding=SumDiff body=SumDiff)
+	 *     (name=ID exp=SumDiff)
 	 * </pre>
 	 */
-	protected void sequence_VariableBinding(ISerializationContext context, VariableBinding semanticObject) {
+	protected void sequence_VarBinding(ISerializationContext context, VarBinding semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MathPackage.Literals.VARIABLE_BINDING__ID) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MathPackage.Literals.VARIABLE_BINDING__ID));
-			if (transientValues.isValueTransient(semanticObject, MathPackage.Literals.VARIABLE_BINDING__BINDING) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MathPackage.Literals.VARIABLE_BINDING__BINDING));
-			if (transientValues.isValueTransient(semanticObject, MathPackage.Literals.VARIABLE_BINDING__BODY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MathPackage.Literals.VARIABLE_BINDING__BODY));
+			if (transientValues.isValueTransient(semanticObject, MathPackage.Literals.VAR_BINDING__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MathPackage.Literals.VAR_BINDING__NAME));
+			if (transientValues.isValueTransient(semanticObject, MathPackage.Literals.VAR_BINDING__EXP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MathPackage.Literals.VAR_BINDING__EXP));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getVariableBindingAccess().getIdIDTerminalRuleCall_2_0(), semanticObject.getId());
-		feeder.accept(grammarAccess.getVariableBindingAccess().getBindingSumDiffParserRuleCall_4_0(), semanticObject.getBinding());
-		feeder.accept(grammarAccess.getVariableBindingAccess().getBodySumDiffParserRuleCall_6_0(), semanticObject.getBody());
+		feeder.accept(grammarAccess.getVarBindingAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getVarBindingAccess().getExpSumDiffParserRuleCall_3_0(), semanticObject.getExp());
 		feeder.finish();
 	}
 	

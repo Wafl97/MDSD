@@ -174,20 +174,20 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleMathExp"
 
 
-    // $ANTLR start "entryRuleExp"
-    // InternalMath.g:78:1: entryRuleExp : ruleExp EOF ;
-    public final void entryRuleExp() throws RecognitionException {
+    // $ANTLR start "entryRuleVarBinding"
+    // InternalMath.g:78:1: entryRuleVarBinding : ruleVarBinding EOF ;
+    public final void entryRuleVarBinding() throws RecognitionException {
         try {
-            // InternalMath.g:79:1: ( ruleExp EOF )
-            // InternalMath.g:80:1: ruleExp EOF
+            // InternalMath.g:79:1: ( ruleVarBinding EOF )
+            // InternalMath.g:80:1: ruleVarBinding EOF
             {
-             before(grammarAccess.getExpRule()); 
+             before(grammarAccess.getVarBindingRule()); 
             pushFollow(FOLLOW_1);
-            ruleExp();
+            ruleVarBinding();
 
             state._fsp--;
 
-             after(grammarAccess.getExpRule()); 
+             after(grammarAccess.getVarBindingRule()); 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -201,35 +201,35 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleExp"
+    // $ANTLR end "entryRuleVarBinding"
 
 
-    // $ANTLR start "ruleExp"
-    // InternalMath.g:87:1: ruleExp : ( ( rule__Exp__Group__0 ) ) ;
-    public final void ruleExp() throws RecognitionException {
+    // $ANTLR start "ruleVarBinding"
+    // InternalMath.g:87:1: ruleVarBinding : ( ( rule__VarBinding__Group__0 ) ) ;
+    public final void ruleVarBinding() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:91:2: ( ( ( rule__Exp__Group__0 ) ) )
-            // InternalMath.g:92:2: ( ( rule__Exp__Group__0 ) )
+            // InternalMath.g:91:2: ( ( ( rule__VarBinding__Group__0 ) ) )
+            // InternalMath.g:92:2: ( ( rule__VarBinding__Group__0 ) )
             {
-            // InternalMath.g:92:2: ( ( rule__Exp__Group__0 ) )
-            // InternalMath.g:93:3: ( rule__Exp__Group__0 )
+            // InternalMath.g:92:2: ( ( rule__VarBinding__Group__0 ) )
+            // InternalMath.g:93:3: ( rule__VarBinding__Group__0 )
             {
-             before(grammarAccess.getExpAccess().getGroup()); 
-            // InternalMath.g:94:3: ( rule__Exp__Group__0 )
-            // InternalMath.g:94:4: rule__Exp__Group__0
+             before(grammarAccess.getVarBindingAccess().getGroup()); 
+            // InternalMath.g:94:3: ( rule__VarBinding__Group__0 )
+            // InternalMath.g:94:4: rule__VarBinding__Group__0
             {
             pushFollow(FOLLOW_2);
-            rule__Exp__Group__0();
+            rule__VarBinding__Group__0();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getExpAccess().getGroup()); 
+             after(grammarAccess.getVarBindingAccess().getGroup()); 
 
             }
 
@@ -248,7 +248,7 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "ruleExp"
+    // $ANTLR end "ruleVarBinding"
 
 
     // $ANTLR start "entryRuleSumDiff"
@@ -713,20 +713,20 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleVariableUse"
 
 
-    // $ANTLR start "entryRuleVariableBinding"
-    // InternalMath.g:253:1: entryRuleVariableBinding : ruleVariableBinding EOF ;
-    public final void entryRuleVariableBinding() throws RecognitionException {
+    // $ANTLR start "entryRuleLetBinding"
+    // InternalMath.g:253:1: entryRuleLetBinding : ruleLetBinding EOF ;
+    public final void entryRuleLetBinding() throws RecognitionException {
         try {
-            // InternalMath.g:254:1: ( ruleVariableBinding EOF )
-            // InternalMath.g:255:1: ruleVariableBinding EOF
+            // InternalMath.g:254:1: ( ruleLetBinding EOF )
+            // InternalMath.g:255:1: ruleLetBinding EOF
             {
-             before(grammarAccess.getVariableBindingRule()); 
+             before(grammarAccess.getLetBindingRule()); 
             pushFollow(FOLLOW_1);
-            ruleVariableBinding();
+            ruleLetBinding();
 
             state._fsp--;
 
-             after(grammarAccess.getVariableBindingRule()); 
+             after(grammarAccess.getLetBindingRule()); 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -740,35 +740,35 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleVariableBinding"
+    // $ANTLR end "entryRuleLetBinding"
 
 
-    // $ANTLR start "ruleVariableBinding"
-    // InternalMath.g:262:1: ruleVariableBinding : ( ( rule__VariableBinding__Group__0 ) ) ;
-    public final void ruleVariableBinding() throws RecognitionException {
+    // $ANTLR start "ruleLetBinding"
+    // InternalMath.g:262:1: ruleLetBinding : ( ( rule__LetBinding__Group__0 ) ) ;
+    public final void ruleLetBinding() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:266:2: ( ( ( rule__VariableBinding__Group__0 ) ) )
-            // InternalMath.g:267:2: ( ( rule__VariableBinding__Group__0 ) )
+            // InternalMath.g:266:2: ( ( ( rule__LetBinding__Group__0 ) ) )
+            // InternalMath.g:267:2: ( ( rule__LetBinding__Group__0 ) )
             {
-            // InternalMath.g:267:2: ( ( rule__VariableBinding__Group__0 ) )
-            // InternalMath.g:268:3: ( rule__VariableBinding__Group__0 )
+            // InternalMath.g:267:2: ( ( rule__LetBinding__Group__0 ) )
+            // InternalMath.g:268:3: ( rule__LetBinding__Group__0 )
             {
-             before(grammarAccess.getVariableBindingAccess().getGroup()); 
-            // InternalMath.g:269:3: ( rule__VariableBinding__Group__0 )
-            // InternalMath.g:269:4: rule__VariableBinding__Group__0
+             before(grammarAccess.getLetBindingAccess().getGroup()); 
+            // InternalMath.g:269:3: ( rule__LetBinding__Group__0 )
+            // InternalMath.g:269:4: rule__LetBinding__Group__0
             {
             pushFollow(FOLLOW_2);
-            rule__VariableBinding__Group__0();
+            rule__LetBinding__Group__0();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getVariableBindingAccess().getGroup()); 
+             after(grammarAccess.getLetBindingAccess().getGroup()); 
 
             }
 
@@ -787,7 +787,7 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "ruleVariableBinding"
+    // $ANTLR end "ruleLetBinding"
 
 
     // $ANTLR start "rule__SumDiff__Alternatives_1_0"
@@ -973,13 +973,13 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Primary__Alternatives"
-    // InternalMath.g:319:1: rule__Primary__Alternatives : ( ( ruleConstant ) | ( ruleParenthesis ) | ( ruleVariableUse ) | ( ruleVariableBinding ) );
+    // InternalMath.g:319:1: rule__Primary__Alternatives : ( ( ruleConstant ) | ( ruleParenthesis ) | ( ruleVariableUse ) | ( ruleLetBinding ) );
     public final void rule__Primary__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:323:1: ( ( ruleConstant ) | ( ruleParenthesis ) | ( ruleVariableUse ) | ( ruleVariableBinding ) )
+            // InternalMath.g:323:1: ( ( ruleConstant ) | ( ruleParenthesis ) | ( ruleVariableUse ) | ( ruleLetBinding ) )
             int alt4=4;
             switch ( input.LA(1) ) {
             case RULE_INT:
@@ -1068,18 +1068,18 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 4 :
-                    // InternalMath.g:342:2: ( ruleVariableBinding )
+                    // InternalMath.g:342:2: ( ruleLetBinding )
                     {
-                    // InternalMath.g:342:2: ( ruleVariableBinding )
-                    // InternalMath.g:343:3: ruleVariableBinding
+                    // InternalMath.g:342:2: ( ruleLetBinding )
+                    // InternalMath.g:343:3: ruleLetBinding
                     {
-                     before(grammarAccess.getPrimaryAccess().getVariableBindingParserRuleCall_3()); 
+                     before(grammarAccess.getPrimaryAccess().getLetBindingParserRuleCall_3()); 
                     pushFollow(FOLLOW_2);
-                    ruleVariableBinding();
+                    ruleLetBinding();
 
                     state._fsp--;
 
-                     after(grammarAccess.getPrimaryAccess().getVariableBindingParserRuleCall_3()); 
+                     after(grammarAccess.getPrimaryAccess().getLetBindingParserRuleCall_3()); 
 
                     }
 
@@ -1103,23 +1103,23 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Primary__Alternatives"
 
 
-    // $ANTLR start "rule__Exp__Group__0"
-    // InternalMath.g:352:1: rule__Exp__Group__0 : rule__Exp__Group__0__Impl rule__Exp__Group__1 ;
-    public final void rule__Exp__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__VarBinding__Group__0"
+    // InternalMath.g:352:1: rule__VarBinding__Group__0 : rule__VarBinding__Group__0__Impl rule__VarBinding__Group__1 ;
+    public final void rule__VarBinding__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:356:1: ( rule__Exp__Group__0__Impl rule__Exp__Group__1 )
-            // InternalMath.g:357:2: rule__Exp__Group__0__Impl rule__Exp__Group__1
+            // InternalMath.g:356:1: ( rule__VarBinding__Group__0__Impl rule__VarBinding__Group__1 )
+            // InternalMath.g:357:2: rule__VarBinding__Group__0__Impl rule__VarBinding__Group__1
             {
             pushFollow(FOLLOW_4);
-            rule__Exp__Group__0__Impl();
+            rule__VarBinding__Group__0__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__Exp__Group__1();
+            rule__VarBinding__Group__1();
 
             state._fsp--;
 
@@ -1138,12 +1138,12 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Exp__Group__0"
+    // $ANTLR end "rule__VarBinding__Group__0"
 
 
-    // $ANTLR start "rule__Exp__Group__0__Impl"
-    // InternalMath.g:364:1: rule__Exp__Group__0__Impl : ( 'var' ) ;
-    public final void rule__Exp__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__VarBinding__Group__0__Impl"
+    // InternalMath.g:364:1: rule__VarBinding__Group__0__Impl : ( 'var' ) ;
+    public final void rule__VarBinding__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -1154,9 +1154,9 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
             // InternalMath.g:369:1: ( 'var' )
             // InternalMath.g:370:2: 'var'
             {
-             before(grammarAccess.getExpAccess().getVarKeyword_0()); 
+             before(grammarAccess.getVarBindingAccess().getVarKeyword_0()); 
             match(input,11,FOLLOW_2); 
-             after(grammarAccess.getExpAccess().getVarKeyword_0()); 
+             after(grammarAccess.getVarBindingAccess().getVarKeyword_0()); 
 
             }
 
@@ -1175,26 +1175,26 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Exp__Group__0__Impl"
+    // $ANTLR end "rule__VarBinding__Group__0__Impl"
 
 
-    // $ANTLR start "rule__Exp__Group__1"
-    // InternalMath.g:379:1: rule__Exp__Group__1 : rule__Exp__Group__1__Impl rule__Exp__Group__2 ;
-    public final void rule__Exp__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__VarBinding__Group__1"
+    // InternalMath.g:379:1: rule__VarBinding__Group__1 : rule__VarBinding__Group__1__Impl rule__VarBinding__Group__2 ;
+    public final void rule__VarBinding__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:383:1: ( rule__Exp__Group__1__Impl rule__Exp__Group__2 )
-            // InternalMath.g:384:2: rule__Exp__Group__1__Impl rule__Exp__Group__2
+            // InternalMath.g:383:1: ( rule__VarBinding__Group__1__Impl rule__VarBinding__Group__2 )
+            // InternalMath.g:384:2: rule__VarBinding__Group__1__Impl rule__VarBinding__Group__2
             {
             pushFollow(FOLLOW_5);
-            rule__Exp__Group__1__Impl();
+            rule__VarBinding__Group__1__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__Exp__Group__2();
+            rule__VarBinding__Group__2();
 
             state._fsp--;
 
@@ -1213,35 +1213,35 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Exp__Group__1"
+    // $ANTLR end "rule__VarBinding__Group__1"
 
 
-    // $ANTLR start "rule__Exp__Group__1__Impl"
-    // InternalMath.g:391:1: rule__Exp__Group__1__Impl : ( ( rule__Exp__NameAssignment_1 ) ) ;
-    public final void rule__Exp__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__VarBinding__Group__1__Impl"
+    // InternalMath.g:391:1: rule__VarBinding__Group__1__Impl : ( ( rule__VarBinding__NameAssignment_1 ) ) ;
+    public final void rule__VarBinding__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:395:1: ( ( ( rule__Exp__NameAssignment_1 ) ) )
-            // InternalMath.g:396:1: ( ( rule__Exp__NameAssignment_1 ) )
+            // InternalMath.g:395:1: ( ( ( rule__VarBinding__NameAssignment_1 ) ) )
+            // InternalMath.g:396:1: ( ( rule__VarBinding__NameAssignment_1 ) )
             {
-            // InternalMath.g:396:1: ( ( rule__Exp__NameAssignment_1 ) )
-            // InternalMath.g:397:2: ( rule__Exp__NameAssignment_1 )
+            // InternalMath.g:396:1: ( ( rule__VarBinding__NameAssignment_1 ) )
+            // InternalMath.g:397:2: ( rule__VarBinding__NameAssignment_1 )
             {
-             before(grammarAccess.getExpAccess().getNameAssignment_1()); 
-            // InternalMath.g:398:2: ( rule__Exp__NameAssignment_1 )
-            // InternalMath.g:398:3: rule__Exp__NameAssignment_1
+             before(grammarAccess.getVarBindingAccess().getNameAssignment_1()); 
+            // InternalMath.g:398:2: ( rule__VarBinding__NameAssignment_1 )
+            // InternalMath.g:398:3: rule__VarBinding__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
-            rule__Exp__NameAssignment_1();
+            rule__VarBinding__NameAssignment_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getExpAccess().getNameAssignment_1()); 
+             after(grammarAccess.getVarBindingAccess().getNameAssignment_1()); 
 
             }
 
@@ -1260,26 +1260,26 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Exp__Group__1__Impl"
+    // $ANTLR end "rule__VarBinding__Group__1__Impl"
 
 
-    // $ANTLR start "rule__Exp__Group__2"
-    // InternalMath.g:406:1: rule__Exp__Group__2 : rule__Exp__Group__2__Impl rule__Exp__Group__3 ;
-    public final void rule__Exp__Group__2() throws RecognitionException {
+    // $ANTLR start "rule__VarBinding__Group__2"
+    // InternalMath.g:406:1: rule__VarBinding__Group__2 : rule__VarBinding__Group__2__Impl rule__VarBinding__Group__3 ;
+    public final void rule__VarBinding__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:410:1: ( rule__Exp__Group__2__Impl rule__Exp__Group__3 )
-            // InternalMath.g:411:2: rule__Exp__Group__2__Impl rule__Exp__Group__3
+            // InternalMath.g:410:1: ( rule__VarBinding__Group__2__Impl rule__VarBinding__Group__3 )
+            // InternalMath.g:411:2: rule__VarBinding__Group__2__Impl rule__VarBinding__Group__3
             {
             pushFollow(FOLLOW_6);
-            rule__Exp__Group__2__Impl();
+            rule__VarBinding__Group__2__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__Exp__Group__3();
+            rule__VarBinding__Group__3();
 
             state._fsp--;
 
@@ -1298,12 +1298,12 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Exp__Group__2"
+    // $ANTLR end "rule__VarBinding__Group__2"
 
 
-    // $ANTLR start "rule__Exp__Group__2__Impl"
-    // InternalMath.g:418:1: rule__Exp__Group__2__Impl : ( '=' ) ;
-    public final void rule__Exp__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__VarBinding__Group__2__Impl"
+    // InternalMath.g:418:1: rule__VarBinding__Group__2__Impl : ( '=' ) ;
+    public final void rule__VarBinding__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -1314,9 +1314,9 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
             // InternalMath.g:423:1: ( '=' )
             // InternalMath.g:424:2: '='
             {
-             before(grammarAccess.getExpAccess().getEqualsSignKeyword_2()); 
+             before(grammarAccess.getVarBindingAccess().getEqualsSignKeyword_2()); 
             match(input,12,FOLLOW_2); 
-             after(grammarAccess.getExpAccess().getEqualsSignKeyword_2()); 
+             after(grammarAccess.getVarBindingAccess().getEqualsSignKeyword_2()); 
 
             }
 
@@ -1335,21 +1335,21 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Exp__Group__2__Impl"
+    // $ANTLR end "rule__VarBinding__Group__2__Impl"
 
 
-    // $ANTLR start "rule__Exp__Group__3"
-    // InternalMath.g:433:1: rule__Exp__Group__3 : rule__Exp__Group__3__Impl ;
-    public final void rule__Exp__Group__3() throws RecognitionException {
+    // $ANTLR start "rule__VarBinding__Group__3"
+    // InternalMath.g:433:1: rule__VarBinding__Group__3 : rule__VarBinding__Group__3__Impl ;
+    public final void rule__VarBinding__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:437:1: ( rule__Exp__Group__3__Impl )
-            // InternalMath.g:438:2: rule__Exp__Group__3__Impl
+            // InternalMath.g:437:1: ( rule__VarBinding__Group__3__Impl )
+            // InternalMath.g:438:2: rule__VarBinding__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
-            rule__Exp__Group__3__Impl();
+            rule__VarBinding__Group__3__Impl();
 
             state._fsp--;
 
@@ -1368,35 +1368,35 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Exp__Group__3"
+    // $ANTLR end "rule__VarBinding__Group__3"
 
 
-    // $ANTLR start "rule__Exp__Group__3__Impl"
-    // InternalMath.g:444:1: rule__Exp__Group__3__Impl : ( ( rule__Exp__ExpAssignment_3 ) ) ;
-    public final void rule__Exp__Group__3__Impl() throws RecognitionException {
+    // $ANTLR start "rule__VarBinding__Group__3__Impl"
+    // InternalMath.g:444:1: rule__VarBinding__Group__3__Impl : ( ( rule__VarBinding__ExpAssignment_3 ) ) ;
+    public final void rule__VarBinding__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:448:1: ( ( ( rule__Exp__ExpAssignment_3 ) ) )
-            // InternalMath.g:449:1: ( ( rule__Exp__ExpAssignment_3 ) )
+            // InternalMath.g:448:1: ( ( ( rule__VarBinding__ExpAssignment_3 ) ) )
+            // InternalMath.g:449:1: ( ( rule__VarBinding__ExpAssignment_3 ) )
             {
-            // InternalMath.g:449:1: ( ( rule__Exp__ExpAssignment_3 ) )
-            // InternalMath.g:450:2: ( rule__Exp__ExpAssignment_3 )
+            // InternalMath.g:449:1: ( ( rule__VarBinding__ExpAssignment_3 ) )
+            // InternalMath.g:450:2: ( rule__VarBinding__ExpAssignment_3 )
             {
-             before(grammarAccess.getExpAccess().getExpAssignment_3()); 
-            // InternalMath.g:451:2: ( rule__Exp__ExpAssignment_3 )
-            // InternalMath.g:451:3: rule__Exp__ExpAssignment_3
+             before(grammarAccess.getVarBindingAccess().getExpAssignment_3()); 
+            // InternalMath.g:451:2: ( rule__VarBinding__ExpAssignment_3 )
+            // InternalMath.g:451:3: rule__VarBinding__ExpAssignment_3
             {
             pushFollow(FOLLOW_2);
-            rule__Exp__ExpAssignment_3();
+            rule__VarBinding__ExpAssignment_3();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getExpAccess().getExpAssignment_3()); 
+             after(grammarAccess.getVarBindingAccess().getExpAssignment_3()); 
 
             }
 
@@ -1415,7 +1415,7 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Exp__Group__3__Impl"
+    // $ANTLR end "rule__VarBinding__Group__3__Impl"
 
 
     // $ANTLR start "rule__SumDiff__Group__0"
@@ -3297,23 +3297,23 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__VariableUse__Group__1__Impl"
 
 
-    // $ANTLR start "rule__VariableBinding__Group__0"
-    // InternalMath.g:1108:1: rule__VariableBinding__Group__0 : rule__VariableBinding__Group__0__Impl rule__VariableBinding__Group__1 ;
-    public final void rule__VariableBinding__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__Group__0"
+    // InternalMath.g:1108:1: rule__LetBinding__Group__0 : rule__LetBinding__Group__0__Impl rule__LetBinding__Group__1 ;
+    public final void rule__LetBinding__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:1112:1: ( rule__VariableBinding__Group__0__Impl rule__VariableBinding__Group__1 )
-            // InternalMath.g:1113:2: rule__VariableBinding__Group__0__Impl rule__VariableBinding__Group__1
+            // InternalMath.g:1112:1: ( rule__LetBinding__Group__0__Impl rule__LetBinding__Group__1 )
+            // InternalMath.g:1113:2: rule__LetBinding__Group__0__Impl rule__LetBinding__Group__1
             {
             pushFollow(FOLLOW_6);
-            rule__VariableBinding__Group__0__Impl();
+            rule__LetBinding__Group__0__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__VariableBinding__Group__1();
+            rule__LetBinding__Group__1();
 
             state._fsp--;
 
@@ -3332,12 +3332,12 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__Group__0"
+    // $ANTLR end "rule__LetBinding__Group__0"
 
 
-    // $ANTLR start "rule__VariableBinding__Group__0__Impl"
-    // InternalMath.g:1120:1: rule__VariableBinding__Group__0__Impl : ( () ) ;
-    public final void rule__VariableBinding__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__Group__0__Impl"
+    // InternalMath.g:1120:1: rule__LetBinding__Group__0__Impl : ( () ) ;
+    public final void rule__LetBinding__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -3348,13 +3348,13 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
             // InternalMath.g:1125:1: ( () )
             // InternalMath.g:1126:2: ()
             {
-             before(grammarAccess.getVariableBindingAccess().getVariableBindingAction_0()); 
+             before(grammarAccess.getLetBindingAccess().getLetBindingAction_0()); 
             // InternalMath.g:1127:2: ()
             // InternalMath.g:1127:3: 
             {
             }
 
-             after(grammarAccess.getVariableBindingAccess().getVariableBindingAction_0()); 
+             after(grammarAccess.getLetBindingAccess().getLetBindingAction_0()); 
 
             }
 
@@ -3369,26 +3369,26 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__Group__0__Impl"
+    // $ANTLR end "rule__LetBinding__Group__0__Impl"
 
 
-    // $ANTLR start "rule__VariableBinding__Group__1"
-    // InternalMath.g:1135:1: rule__VariableBinding__Group__1 : rule__VariableBinding__Group__1__Impl rule__VariableBinding__Group__2 ;
-    public final void rule__VariableBinding__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__Group__1"
+    // InternalMath.g:1135:1: rule__LetBinding__Group__1 : rule__LetBinding__Group__1__Impl rule__LetBinding__Group__2 ;
+    public final void rule__LetBinding__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:1139:1: ( rule__VariableBinding__Group__1__Impl rule__VariableBinding__Group__2 )
-            // InternalMath.g:1140:2: rule__VariableBinding__Group__1__Impl rule__VariableBinding__Group__2
+            // InternalMath.g:1139:1: ( rule__LetBinding__Group__1__Impl rule__LetBinding__Group__2 )
+            // InternalMath.g:1140:2: rule__LetBinding__Group__1__Impl rule__LetBinding__Group__2
             {
             pushFollow(FOLLOW_4);
-            rule__VariableBinding__Group__1__Impl();
+            rule__LetBinding__Group__1__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__VariableBinding__Group__2();
+            rule__LetBinding__Group__2();
 
             state._fsp--;
 
@@ -3407,12 +3407,12 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__Group__1"
+    // $ANTLR end "rule__LetBinding__Group__1"
 
 
-    // $ANTLR start "rule__VariableBinding__Group__1__Impl"
-    // InternalMath.g:1147:1: rule__VariableBinding__Group__1__Impl : ( 'let' ) ;
-    public final void rule__VariableBinding__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__Group__1__Impl"
+    // InternalMath.g:1147:1: rule__LetBinding__Group__1__Impl : ( 'let' ) ;
+    public final void rule__LetBinding__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -3423,9 +3423,9 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
             // InternalMath.g:1152:1: ( 'let' )
             // InternalMath.g:1153:2: 'let'
             {
-             before(grammarAccess.getVariableBindingAccess().getLetKeyword_1()); 
+             before(grammarAccess.getLetBindingAccess().getLetKeyword_1()); 
             match(input,19,FOLLOW_2); 
-             after(grammarAccess.getVariableBindingAccess().getLetKeyword_1()); 
+             after(grammarAccess.getLetBindingAccess().getLetKeyword_1()); 
 
             }
 
@@ -3444,26 +3444,26 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__Group__1__Impl"
+    // $ANTLR end "rule__LetBinding__Group__1__Impl"
 
 
-    // $ANTLR start "rule__VariableBinding__Group__2"
-    // InternalMath.g:1162:1: rule__VariableBinding__Group__2 : rule__VariableBinding__Group__2__Impl rule__VariableBinding__Group__3 ;
-    public final void rule__VariableBinding__Group__2() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__Group__2"
+    // InternalMath.g:1162:1: rule__LetBinding__Group__2 : rule__LetBinding__Group__2__Impl rule__LetBinding__Group__3 ;
+    public final void rule__LetBinding__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:1166:1: ( rule__VariableBinding__Group__2__Impl rule__VariableBinding__Group__3 )
-            // InternalMath.g:1167:2: rule__VariableBinding__Group__2__Impl rule__VariableBinding__Group__3
+            // InternalMath.g:1166:1: ( rule__LetBinding__Group__2__Impl rule__LetBinding__Group__3 )
+            // InternalMath.g:1167:2: rule__LetBinding__Group__2__Impl rule__LetBinding__Group__3
             {
             pushFollow(FOLLOW_5);
-            rule__VariableBinding__Group__2__Impl();
+            rule__LetBinding__Group__2__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__VariableBinding__Group__3();
+            rule__LetBinding__Group__3();
 
             state._fsp--;
 
@@ -3482,35 +3482,35 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__Group__2"
+    // $ANTLR end "rule__LetBinding__Group__2"
 
 
-    // $ANTLR start "rule__VariableBinding__Group__2__Impl"
-    // InternalMath.g:1174:1: rule__VariableBinding__Group__2__Impl : ( ( rule__VariableBinding__IdAssignment_2 ) ) ;
-    public final void rule__VariableBinding__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__Group__2__Impl"
+    // InternalMath.g:1174:1: rule__LetBinding__Group__2__Impl : ( ( rule__LetBinding__NameAssignment_2 ) ) ;
+    public final void rule__LetBinding__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:1178:1: ( ( ( rule__VariableBinding__IdAssignment_2 ) ) )
-            // InternalMath.g:1179:1: ( ( rule__VariableBinding__IdAssignment_2 ) )
+            // InternalMath.g:1178:1: ( ( ( rule__LetBinding__NameAssignment_2 ) ) )
+            // InternalMath.g:1179:1: ( ( rule__LetBinding__NameAssignment_2 ) )
             {
-            // InternalMath.g:1179:1: ( ( rule__VariableBinding__IdAssignment_2 ) )
-            // InternalMath.g:1180:2: ( rule__VariableBinding__IdAssignment_2 )
+            // InternalMath.g:1179:1: ( ( rule__LetBinding__NameAssignment_2 ) )
+            // InternalMath.g:1180:2: ( rule__LetBinding__NameAssignment_2 )
             {
-             before(grammarAccess.getVariableBindingAccess().getIdAssignment_2()); 
-            // InternalMath.g:1181:2: ( rule__VariableBinding__IdAssignment_2 )
-            // InternalMath.g:1181:3: rule__VariableBinding__IdAssignment_2
+             before(grammarAccess.getLetBindingAccess().getNameAssignment_2()); 
+            // InternalMath.g:1181:2: ( rule__LetBinding__NameAssignment_2 )
+            // InternalMath.g:1181:3: rule__LetBinding__NameAssignment_2
             {
             pushFollow(FOLLOW_2);
-            rule__VariableBinding__IdAssignment_2();
+            rule__LetBinding__NameAssignment_2();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getVariableBindingAccess().getIdAssignment_2()); 
+             after(grammarAccess.getLetBindingAccess().getNameAssignment_2()); 
 
             }
 
@@ -3529,26 +3529,26 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__Group__2__Impl"
+    // $ANTLR end "rule__LetBinding__Group__2__Impl"
 
 
-    // $ANTLR start "rule__VariableBinding__Group__3"
-    // InternalMath.g:1189:1: rule__VariableBinding__Group__3 : rule__VariableBinding__Group__3__Impl rule__VariableBinding__Group__4 ;
-    public final void rule__VariableBinding__Group__3() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__Group__3"
+    // InternalMath.g:1189:1: rule__LetBinding__Group__3 : rule__LetBinding__Group__3__Impl rule__LetBinding__Group__4 ;
+    public final void rule__LetBinding__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:1193:1: ( rule__VariableBinding__Group__3__Impl rule__VariableBinding__Group__4 )
-            // InternalMath.g:1194:2: rule__VariableBinding__Group__3__Impl rule__VariableBinding__Group__4
+            // InternalMath.g:1193:1: ( rule__LetBinding__Group__3__Impl rule__LetBinding__Group__4 )
+            // InternalMath.g:1194:2: rule__LetBinding__Group__3__Impl rule__LetBinding__Group__4
             {
             pushFollow(FOLLOW_6);
-            rule__VariableBinding__Group__3__Impl();
+            rule__LetBinding__Group__3__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__VariableBinding__Group__4();
+            rule__LetBinding__Group__4();
 
             state._fsp--;
 
@@ -3567,12 +3567,12 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__Group__3"
+    // $ANTLR end "rule__LetBinding__Group__3"
 
 
-    // $ANTLR start "rule__VariableBinding__Group__3__Impl"
-    // InternalMath.g:1201:1: rule__VariableBinding__Group__3__Impl : ( '=' ) ;
-    public final void rule__VariableBinding__Group__3__Impl() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__Group__3__Impl"
+    // InternalMath.g:1201:1: rule__LetBinding__Group__3__Impl : ( '=' ) ;
+    public final void rule__LetBinding__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -3583,9 +3583,9 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
             // InternalMath.g:1206:1: ( '=' )
             // InternalMath.g:1207:2: '='
             {
-             before(grammarAccess.getVariableBindingAccess().getEqualsSignKeyword_3()); 
+             before(grammarAccess.getLetBindingAccess().getEqualsSignKeyword_3()); 
             match(input,12,FOLLOW_2); 
-             after(grammarAccess.getVariableBindingAccess().getEqualsSignKeyword_3()); 
+             after(grammarAccess.getLetBindingAccess().getEqualsSignKeyword_3()); 
 
             }
 
@@ -3604,26 +3604,26 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__Group__3__Impl"
+    // $ANTLR end "rule__LetBinding__Group__3__Impl"
 
 
-    // $ANTLR start "rule__VariableBinding__Group__4"
-    // InternalMath.g:1216:1: rule__VariableBinding__Group__4 : rule__VariableBinding__Group__4__Impl rule__VariableBinding__Group__5 ;
-    public final void rule__VariableBinding__Group__4() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__Group__4"
+    // InternalMath.g:1216:1: rule__LetBinding__Group__4 : rule__LetBinding__Group__4__Impl rule__LetBinding__Group__5 ;
+    public final void rule__LetBinding__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:1220:1: ( rule__VariableBinding__Group__4__Impl rule__VariableBinding__Group__5 )
-            // InternalMath.g:1221:2: rule__VariableBinding__Group__4__Impl rule__VariableBinding__Group__5
+            // InternalMath.g:1220:1: ( rule__LetBinding__Group__4__Impl rule__LetBinding__Group__5 )
+            // InternalMath.g:1221:2: rule__LetBinding__Group__4__Impl rule__LetBinding__Group__5
             {
             pushFollow(FOLLOW_14);
-            rule__VariableBinding__Group__4__Impl();
+            rule__LetBinding__Group__4__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__VariableBinding__Group__5();
+            rule__LetBinding__Group__5();
 
             state._fsp--;
 
@@ -3642,35 +3642,35 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__Group__4"
+    // $ANTLR end "rule__LetBinding__Group__4"
 
 
-    // $ANTLR start "rule__VariableBinding__Group__4__Impl"
-    // InternalMath.g:1228:1: rule__VariableBinding__Group__4__Impl : ( ( rule__VariableBinding__BindingAssignment_4 ) ) ;
-    public final void rule__VariableBinding__Group__4__Impl() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__Group__4__Impl"
+    // InternalMath.g:1228:1: rule__LetBinding__Group__4__Impl : ( ( rule__LetBinding__BindingAssignment_4 ) ) ;
+    public final void rule__LetBinding__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:1232:1: ( ( ( rule__VariableBinding__BindingAssignment_4 ) ) )
-            // InternalMath.g:1233:1: ( ( rule__VariableBinding__BindingAssignment_4 ) )
+            // InternalMath.g:1232:1: ( ( ( rule__LetBinding__BindingAssignment_4 ) ) )
+            // InternalMath.g:1233:1: ( ( rule__LetBinding__BindingAssignment_4 ) )
             {
-            // InternalMath.g:1233:1: ( ( rule__VariableBinding__BindingAssignment_4 ) )
-            // InternalMath.g:1234:2: ( rule__VariableBinding__BindingAssignment_4 )
+            // InternalMath.g:1233:1: ( ( rule__LetBinding__BindingAssignment_4 ) )
+            // InternalMath.g:1234:2: ( rule__LetBinding__BindingAssignment_4 )
             {
-             before(grammarAccess.getVariableBindingAccess().getBindingAssignment_4()); 
-            // InternalMath.g:1235:2: ( rule__VariableBinding__BindingAssignment_4 )
-            // InternalMath.g:1235:3: rule__VariableBinding__BindingAssignment_4
+             before(grammarAccess.getLetBindingAccess().getBindingAssignment_4()); 
+            // InternalMath.g:1235:2: ( rule__LetBinding__BindingAssignment_4 )
+            // InternalMath.g:1235:3: rule__LetBinding__BindingAssignment_4
             {
             pushFollow(FOLLOW_2);
-            rule__VariableBinding__BindingAssignment_4();
+            rule__LetBinding__BindingAssignment_4();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getVariableBindingAccess().getBindingAssignment_4()); 
+             after(grammarAccess.getLetBindingAccess().getBindingAssignment_4()); 
 
             }
 
@@ -3689,26 +3689,26 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__Group__4__Impl"
+    // $ANTLR end "rule__LetBinding__Group__4__Impl"
 
 
-    // $ANTLR start "rule__VariableBinding__Group__5"
-    // InternalMath.g:1243:1: rule__VariableBinding__Group__5 : rule__VariableBinding__Group__5__Impl rule__VariableBinding__Group__6 ;
-    public final void rule__VariableBinding__Group__5() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__Group__5"
+    // InternalMath.g:1243:1: rule__LetBinding__Group__5 : rule__LetBinding__Group__5__Impl rule__LetBinding__Group__6 ;
+    public final void rule__LetBinding__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:1247:1: ( rule__VariableBinding__Group__5__Impl rule__VariableBinding__Group__6 )
-            // InternalMath.g:1248:2: rule__VariableBinding__Group__5__Impl rule__VariableBinding__Group__6
+            // InternalMath.g:1247:1: ( rule__LetBinding__Group__5__Impl rule__LetBinding__Group__6 )
+            // InternalMath.g:1248:2: rule__LetBinding__Group__5__Impl rule__LetBinding__Group__6
             {
             pushFollow(FOLLOW_6);
-            rule__VariableBinding__Group__5__Impl();
+            rule__LetBinding__Group__5__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__VariableBinding__Group__6();
+            rule__LetBinding__Group__6();
 
             state._fsp--;
 
@@ -3727,12 +3727,12 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__Group__5"
+    // $ANTLR end "rule__LetBinding__Group__5"
 
 
-    // $ANTLR start "rule__VariableBinding__Group__5__Impl"
-    // InternalMath.g:1255:1: rule__VariableBinding__Group__5__Impl : ( 'in' ) ;
-    public final void rule__VariableBinding__Group__5__Impl() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__Group__5__Impl"
+    // InternalMath.g:1255:1: rule__LetBinding__Group__5__Impl : ( 'in' ) ;
+    public final void rule__LetBinding__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -3743,9 +3743,9 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
             // InternalMath.g:1260:1: ( 'in' )
             // InternalMath.g:1261:2: 'in'
             {
-             before(grammarAccess.getVariableBindingAccess().getInKeyword_5()); 
+             before(grammarAccess.getLetBindingAccess().getInKeyword_5()); 
             match(input,20,FOLLOW_2); 
-             after(grammarAccess.getVariableBindingAccess().getInKeyword_5()); 
+             after(grammarAccess.getLetBindingAccess().getInKeyword_5()); 
 
             }
 
@@ -3764,26 +3764,26 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__Group__5__Impl"
+    // $ANTLR end "rule__LetBinding__Group__5__Impl"
 
 
-    // $ANTLR start "rule__VariableBinding__Group__6"
-    // InternalMath.g:1270:1: rule__VariableBinding__Group__6 : rule__VariableBinding__Group__6__Impl rule__VariableBinding__Group__7 ;
-    public final void rule__VariableBinding__Group__6() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__Group__6"
+    // InternalMath.g:1270:1: rule__LetBinding__Group__6 : rule__LetBinding__Group__6__Impl rule__LetBinding__Group__7 ;
+    public final void rule__LetBinding__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:1274:1: ( rule__VariableBinding__Group__6__Impl rule__VariableBinding__Group__7 )
-            // InternalMath.g:1275:2: rule__VariableBinding__Group__6__Impl rule__VariableBinding__Group__7
+            // InternalMath.g:1274:1: ( rule__LetBinding__Group__6__Impl rule__LetBinding__Group__7 )
+            // InternalMath.g:1275:2: rule__LetBinding__Group__6__Impl rule__LetBinding__Group__7
             {
             pushFollow(FOLLOW_15);
-            rule__VariableBinding__Group__6__Impl();
+            rule__LetBinding__Group__6__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__VariableBinding__Group__7();
+            rule__LetBinding__Group__7();
 
             state._fsp--;
 
@@ -3802,35 +3802,35 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__Group__6"
+    // $ANTLR end "rule__LetBinding__Group__6"
 
 
-    // $ANTLR start "rule__VariableBinding__Group__6__Impl"
-    // InternalMath.g:1282:1: rule__VariableBinding__Group__6__Impl : ( ( rule__VariableBinding__BodyAssignment_6 ) ) ;
-    public final void rule__VariableBinding__Group__6__Impl() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__Group__6__Impl"
+    // InternalMath.g:1282:1: rule__LetBinding__Group__6__Impl : ( ( rule__LetBinding__BodyAssignment_6 ) ) ;
+    public final void rule__LetBinding__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:1286:1: ( ( ( rule__VariableBinding__BodyAssignment_6 ) ) )
-            // InternalMath.g:1287:1: ( ( rule__VariableBinding__BodyAssignment_6 ) )
+            // InternalMath.g:1286:1: ( ( ( rule__LetBinding__BodyAssignment_6 ) ) )
+            // InternalMath.g:1287:1: ( ( rule__LetBinding__BodyAssignment_6 ) )
             {
-            // InternalMath.g:1287:1: ( ( rule__VariableBinding__BodyAssignment_6 ) )
-            // InternalMath.g:1288:2: ( rule__VariableBinding__BodyAssignment_6 )
+            // InternalMath.g:1287:1: ( ( rule__LetBinding__BodyAssignment_6 ) )
+            // InternalMath.g:1288:2: ( rule__LetBinding__BodyAssignment_6 )
             {
-             before(grammarAccess.getVariableBindingAccess().getBodyAssignment_6()); 
-            // InternalMath.g:1289:2: ( rule__VariableBinding__BodyAssignment_6 )
-            // InternalMath.g:1289:3: rule__VariableBinding__BodyAssignment_6
+             before(grammarAccess.getLetBindingAccess().getBodyAssignment_6()); 
+            // InternalMath.g:1289:2: ( rule__LetBinding__BodyAssignment_6 )
+            // InternalMath.g:1289:3: rule__LetBinding__BodyAssignment_6
             {
             pushFollow(FOLLOW_2);
-            rule__VariableBinding__BodyAssignment_6();
+            rule__LetBinding__BodyAssignment_6();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getVariableBindingAccess().getBodyAssignment_6()); 
+             after(grammarAccess.getLetBindingAccess().getBodyAssignment_6()); 
 
             }
 
@@ -3849,21 +3849,21 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__Group__6__Impl"
+    // $ANTLR end "rule__LetBinding__Group__6__Impl"
 
 
-    // $ANTLR start "rule__VariableBinding__Group__7"
-    // InternalMath.g:1297:1: rule__VariableBinding__Group__7 : rule__VariableBinding__Group__7__Impl ;
-    public final void rule__VariableBinding__Group__7() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__Group__7"
+    // InternalMath.g:1297:1: rule__LetBinding__Group__7 : rule__LetBinding__Group__7__Impl ;
+    public final void rule__LetBinding__Group__7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:1301:1: ( rule__VariableBinding__Group__7__Impl )
-            // InternalMath.g:1302:2: rule__VariableBinding__Group__7__Impl
+            // InternalMath.g:1301:1: ( rule__LetBinding__Group__7__Impl )
+            // InternalMath.g:1302:2: rule__LetBinding__Group__7__Impl
             {
             pushFollow(FOLLOW_2);
-            rule__VariableBinding__Group__7__Impl();
+            rule__LetBinding__Group__7__Impl();
 
             state._fsp--;
 
@@ -3882,12 +3882,12 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__Group__7"
+    // $ANTLR end "rule__LetBinding__Group__7"
 
 
-    // $ANTLR start "rule__VariableBinding__Group__7__Impl"
-    // InternalMath.g:1308:1: rule__VariableBinding__Group__7__Impl : ( 'end' ) ;
-    public final void rule__VariableBinding__Group__7__Impl() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__Group__7__Impl"
+    // InternalMath.g:1308:1: rule__LetBinding__Group__7__Impl : ( 'end' ) ;
+    public final void rule__LetBinding__Group__7__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -3898,9 +3898,9 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
             // InternalMath.g:1313:1: ( 'end' )
             // InternalMath.g:1314:2: 'end'
             {
-             before(grammarAccess.getVariableBindingAccess().getEndKeyword_7()); 
+             before(grammarAccess.getLetBindingAccess().getEndKeyword_7()); 
             match(input,21,FOLLOW_2); 
-             after(grammarAccess.getVariableBindingAccess().getEndKeyword_7()); 
+             after(grammarAccess.getLetBindingAccess().getEndKeyword_7()); 
 
             }
 
@@ -3919,29 +3919,29 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__Group__7__Impl"
+    // $ANTLR end "rule__LetBinding__Group__7__Impl"
 
 
     // $ANTLR start "rule__MathExp__ExpsAssignment"
-    // InternalMath.g:1324:1: rule__MathExp__ExpsAssignment : ( ruleExp ) ;
+    // InternalMath.g:1324:1: rule__MathExp__ExpsAssignment : ( ruleVarBinding ) ;
     public final void rule__MathExp__ExpsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMath.g:1328:1: ( ( ruleExp ) )
-            // InternalMath.g:1329:2: ( ruleExp )
+            // InternalMath.g:1328:1: ( ( ruleVarBinding ) )
+            // InternalMath.g:1329:2: ( ruleVarBinding )
             {
-            // InternalMath.g:1329:2: ( ruleExp )
-            // InternalMath.g:1330:3: ruleExp
+            // InternalMath.g:1329:2: ( ruleVarBinding )
+            // InternalMath.g:1330:3: ruleVarBinding
             {
-             before(grammarAccess.getMathExpAccess().getExpsExpParserRuleCall_0()); 
+             before(grammarAccess.getMathExpAccess().getExpsVarBindingParserRuleCall_0()); 
             pushFollow(FOLLOW_2);
-            ruleExp();
+            ruleVarBinding();
 
             state._fsp--;
 
-             after(grammarAccess.getMathExpAccess().getExpsExpParserRuleCall_0()); 
+             after(grammarAccess.getMathExpAccess().getExpsVarBindingParserRuleCall_0()); 
 
             }
 
@@ -3963,9 +3963,9 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__MathExp__ExpsAssignment"
 
 
-    // $ANTLR start "rule__Exp__NameAssignment_1"
-    // InternalMath.g:1339:1: rule__Exp__NameAssignment_1 : ( RULE_ID ) ;
-    public final void rule__Exp__NameAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__VarBinding__NameAssignment_1"
+    // InternalMath.g:1339:1: rule__VarBinding__NameAssignment_1 : ( RULE_ID ) ;
+    public final void rule__VarBinding__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -3976,9 +3976,9 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
             // InternalMath.g:1344:2: ( RULE_ID )
             // InternalMath.g:1345:3: RULE_ID
             {
-             before(grammarAccess.getExpAccess().getNameIDTerminalRuleCall_1_0()); 
+             before(grammarAccess.getVarBindingAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FOLLOW_2); 
-             after(grammarAccess.getExpAccess().getNameIDTerminalRuleCall_1_0()); 
+             after(grammarAccess.getVarBindingAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
 
@@ -3997,12 +3997,12 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Exp__NameAssignment_1"
+    // $ANTLR end "rule__VarBinding__NameAssignment_1"
 
 
-    // $ANTLR start "rule__Exp__ExpAssignment_3"
-    // InternalMath.g:1354:1: rule__Exp__ExpAssignment_3 : ( ruleSumDiff ) ;
-    public final void rule__Exp__ExpAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__VarBinding__ExpAssignment_3"
+    // InternalMath.g:1354:1: rule__VarBinding__ExpAssignment_3 : ( ruleSumDiff ) ;
+    public final void rule__VarBinding__ExpAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -4013,13 +4013,13 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
             // InternalMath.g:1359:2: ( ruleSumDiff )
             // InternalMath.g:1360:3: ruleSumDiff
             {
-             before(grammarAccess.getExpAccess().getExpSumDiffParserRuleCall_3_0()); 
+             before(grammarAccess.getVarBindingAccess().getExpSumDiffParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
             ruleSumDiff();
 
             state._fsp--;
 
-             after(grammarAccess.getExpAccess().getExpSumDiffParserRuleCall_3_0()); 
+             after(grammarAccess.getVarBindingAccess().getExpSumDiffParserRuleCall_3_0()); 
 
             }
 
@@ -4038,7 +4038,7 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Exp__ExpAssignment_3"
+    // $ANTLR end "rule__VarBinding__ExpAssignment_3"
 
 
     // $ANTLR start "rule__SumDiff__RightAssignment_1_1"
@@ -4238,9 +4238,9 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__VariableUse__RefAssignment_1"
 
 
-    // $ANTLR start "rule__VariableBinding__IdAssignment_2"
-    // InternalMath.g:1444:1: rule__VariableBinding__IdAssignment_2 : ( RULE_ID ) ;
-    public final void rule__VariableBinding__IdAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__NameAssignment_2"
+    // InternalMath.g:1444:1: rule__LetBinding__NameAssignment_2 : ( RULE_ID ) ;
+    public final void rule__LetBinding__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -4251,9 +4251,9 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
             // InternalMath.g:1449:2: ( RULE_ID )
             // InternalMath.g:1450:3: RULE_ID
             {
-             before(grammarAccess.getVariableBindingAccess().getIdIDTerminalRuleCall_2_0()); 
+             before(grammarAccess.getLetBindingAccess().getNameIDTerminalRuleCall_2_0()); 
             match(input,RULE_ID,FOLLOW_2); 
-             after(grammarAccess.getVariableBindingAccess().getIdIDTerminalRuleCall_2_0()); 
+             after(grammarAccess.getLetBindingAccess().getNameIDTerminalRuleCall_2_0()); 
 
             }
 
@@ -4272,12 +4272,12 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__IdAssignment_2"
+    // $ANTLR end "rule__LetBinding__NameAssignment_2"
 
 
-    // $ANTLR start "rule__VariableBinding__BindingAssignment_4"
-    // InternalMath.g:1459:1: rule__VariableBinding__BindingAssignment_4 : ( ruleSumDiff ) ;
-    public final void rule__VariableBinding__BindingAssignment_4() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__BindingAssignment_4"
+    // InternalMath.g:1459:1: rule__LetBinding__BindingAssignment_4 : ( ruleSumDiff ) ;
+    public final void rule__LetBinding__BindingAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -4288,13 +4288,13 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
             // InternalMath.g:1464:2: ( ruleSumDiff )
             // InternalMath.g:1465:3: ruleSumDiff
             {
-             before(grammarAccess.getVariableBindingAccess().getBindingSumDiffParserRuleCall_4_0()); 
+             before(grammarAccess.getLetBindingAccess().getBindingSumDiffParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
             ruleSumDiff();
 
             state._fsp--;
 
-             after(grammarAccess.getVariableBindingAccess().getBindingSumDiffParserRuleCall_4_0()); 
+             after(grammarAccess.getLetBindingAccess().getBindingSumDiffParserRuleCall_4_0()); 
 
             }
 
@@ -4313,12 +4313,12 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__BindingAssignment_4"
+    // $ANTLR end "rule__LetBinding__BindingAssignment_4"
 
 
-    // $ANTLR start "rule__VariableBinding__BodyAssignment_6"
-    // InternalMath.g:1474:1: rule__VariableBinding__BodyAssignment_6 : ( ruleSumDiff ) ;
-    public final void rule__VariableBinding__BodyAssignment_6() throws RecognitionException {
+    // $ANTLR start "rule__LetBinding__BodyAssignment_6"
+    // InternalMath.g:1474:1: rule__LetBinding__BodyAssignment_6 : ( ruleSumDiff ) ;
+    public final void rule__LetBinding__BodyAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -4329,13 +4329,13 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
             // InternalMath.g:1479:2: ( ruleSumDiff )
             // InternalMath.g:1480:3: ruleSumDiff
             {
-             before(grammarAccess.getVariableBindingAccess().getBodySumDiffParserRuleCall_6_0()); 
+             before(grammarAccess.getLetBindingAccess().getBodySumDiffParserRuleCall_6_0()); 
             pushFollow(FOLLOW_2);
             ruleSumDiff();
 
             state._fsp--;
 
-             after(grammarAccess.getVariableBindingAccess().getBodySumDiffParserRuleCall_6_0()); 
+             after(grammarAccess.getLetBindingAccess().getBodySumDiffParserRuleCall_6_0()); 
 
             }
 
@@ -4354,7 +4354,7 @@ public class InternalMathParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__VariableBinding__BodyAssignment_6"
+    // $ANTLR end "rule__LetBinding__BodyAssignment_6"
 
     // Delegated rules
 

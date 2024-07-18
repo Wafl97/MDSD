@@ -9,6 +9,11 @@ import dk.sdu.mmmi.mdsd.math.MathPackage
 import dk.sdu.mmmi.mdsd.math.VariableUse
 import org.eclipse.xtext.scoping.Scopes
 import org.eclipse.xtext.EcoreUtil2
+import dk.sdu.mmmi.mdsd.math.LetBinding
+import org.eclipse.xtext.scoping.IScope
+import dk.sdu.mmmi.mdsd.math.MathExp
+import dk.sdu.mmmi.mdsd.math.VarBinding
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
 
 /**
  * This class contains custom scoping description.
@@ -16,16 +21,16 @@ import org.eclipse.xtext.EcoreUtil2
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping
  * on how and when to use it.
  */
-class MathScopeProvider extends AbstractMathScopeProvider {
+class MathScopeProvider extends AbstractDeclarativeScopeProvider {
 	
-    override getScope(EObject context, EReference ref) {
-    	if (context instanceof VariableUse && ref == MathPackage.Literals.VARIABLE_USE__REF) {
-    		val root = EcoreUtil2.getRootContainer(context)
-    		val elements = EcoreUtil2.getAllContentsOfType(root, VariableUse)
-    		return Scopes.scopeFor(elements)
-    	}
-    	
-    	return super.getScope(context, ref)
-    }
-
+    //override getScope(EObject context, EReference ref) {
+    //	if (context instanceof VariableUse && ref == MathPackage.Literals.VARIABLE_USE__REF) {
+    //		val root = EcoreUtil2.getRootContainer(context)
+    //		val elements = EcoreUtil2.getAllContentsOfType(root, VariableUse)
+    //		return Scopes.scopeFor(elements)
+    //	}
+    //	
+    //	return super.getScope(context, ref)
+    //}
+    
 }

@@ -1,0 +1,5 @@
+program P1Basic
+
+compute { }
+compute {1,2,3}
+compute {[1,2], [3,4]}

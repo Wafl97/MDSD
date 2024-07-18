@@ -3,9 +3,9 @@
  */
 package dk.sdu.mmmi.mdsd.math.impl;
 
-import dk.sdu.mmmi.mdsd.math.Exp;
 import dk.sdu.mmmi.mdsd.math.MathExp;
 import dk.sdu.mmmi.mdsd.math.MathPackage;
+import dk.sdu.mmmi.mdsd.math.VarBinding;
 
 import java.util.Collection;
 
@@ -44,7 +44,7 @@ public class MathExpImpl extends MinimalEObjectImpl.Container implements MathExp
    * @generated
    * @ordered
    */
-  protected EList<Exp> exps;
+  protected EList<VarBinding> exps;
 
   /**
    * <!-- begin-user-doc -->
@@ -73,11 +73,11 @@ public class MathExpImpl extends MinimalEObjectImpl.Container implements MathExp
    * @generated
    */
   @Override
-  public EList<Exp> getExps()
+  public EList<VarBinding> getExps()
   {
     if (exps == null)
     {
-      exps = new EObjectContainmentEList<Exp>(Exp.class, this, MathPackage.MATH_EXP__EXPS);
+      exps = new EObjectContainmentEList<VarBinding>(VarBinding.class, this, MathPackage.MATH_EXP__EXPS);
     }
     return exps;
   }
@@ -127,7 +127,7 @@ public class MathExpImpl extends MinimalEObjectImpl.Container implements MathExp
     {
       case MathPackage.MATH_EXP__EXPS:
         getExps().clear();
-        getExps().addAll((Collection<? extends Exp>)newValue);
+        getExps().addAll((Collection<? extends VarBinding>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

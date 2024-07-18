@@ -1,0 +1,19 @@
+program XP1HelloWorld
+
+external mod3(Set(Int))
+
+record r1(a: Int) {
+	x: {a}
+}
+
+record r2: r1 (b: Int, c: Set(Int)) {
+	y: x U {b} * c
+}
+
+record r3: r2 (d: Set(Int)) {
+	z: x & y U {d}
+}
+
+compute !r3(5,5,{5},{5,5})->z
+compute !r3(6,6,{6},{6,6,6})->y#<1>
+compute !r3(7,7,{7},{7,7,7,7})->x#[mod3]

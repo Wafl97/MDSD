@@ -9,11 +9,12 @@
     <genClasses ecoreClass="Math.ecore#//MathExp">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Math.ecore#//MathExp/exps"/>
     </genClasses>
-    <genClasses ecoreClass="Math.ecore#//Exp">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Math.ecore#//Exp/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Math.ecore#//Exp/exp"/>
+    <genClasses ecoreClass="Math.ecore#//VarBinding">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Math.ecore#//VarBinding/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Math.ecore#//VarBinding/exp"/>
     </genClasses>
     <genClasses ecoreClass="Math.ecore#//Expression"/>
+    <genClasses ecoreClass="Math.ecore#//Experssion"/>
     <genClasses ecoreClass="Math.ecore#//Add">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Math.ecore#//Add/left"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Math.ecore#//Add/right"/>
@@ -39,10 +40,10 @@
     <genClasses ecoreClass="Math.ecore#//VariableUse">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Math.ecore#//VariableUse/ref"/>
     </genClasses>
-    <genClasses ecoreClass="Math.ecore#//VariableBinding">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Math.ecore#//VariableBinding/id"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Math.ecore#//VariableBinding/binding"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Math.ecore#//VariableBinding/body"/>
+    <genClasses ecoreClass="Math.ecore#//LetBinding">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Math.ecore#//LetBinding/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Math.ecore#//LetBinding/binding"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Math.ecore#//LetBinding/body"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
